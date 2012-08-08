@@ -1,0 +1,109 @@
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"> <%= link_to "Home", root_url %> / Contracts</div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <div class="pagedivider  pb25 pt25">
+      <div class="headingBg">
+        <div class="fl">
+          <h2><%= t("contracts.name") %></h2>
+
+        </div>  <div class="clear"></div></div>
+
+      <table class="contract" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr class="brb">
+            <td colspan="8" class="trhead" align="center"><%= t("contracts.contract_activity") %></td>
+            <td class="trhead" align="center">
+             <!-- <a href="http://wholebooks.rails-team.com/apps/contract_configuregrid.html"><%#= t("configure") %></a>-->
+            </td>
+          </tr>
+          <tr class="brb">
+            <td class="trhead" align="center">
+              <strong>
+                <%= link_to t("action") %>
+              </strong>
+            </td>
+            <td class="trhead" align="center">
+              <strong>
+                <%= link_to t("time") %>
+              </strong>
+            </td>
+            <td class="trhead" align="left">
+              <div align="center"><strong><%= t("save") %></strong></div>
+            </td>
+            <td class="trhead" align="center"><strong><%= t("posted") %></strong></td>
+            <td class="trhead" align="center"><strong><%= t("proposed") %></strong></td>
+            <td class="trhead" width="15%" align="center"><strong><%= t("received") %></strong></td>
+            <td class="trhead" width="14%" align="center"><strong><%= t("client_approved") %></strong></td>
+            <td class="trhead" width="14%" align="center"><strong><%= t("recepient_approved") %></strong></td>
+            <td class="trhead" width="9%" align="center"><strong><%= t("rejected") %></strong></td>
+          </tr>
+          <tr>
+            <td width="8%" align="left">
+              <%= link_to t("defaults"), edit_user_contract_preference_path(current_user), :class => "link" %>
+            </td>
+            <td rowspan="3" valign="middle" width="14%" align="center"><p>&nbsp;</p>
+              <p>This Week</p>                  </td>
+            <td rowspan="3" width="16%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.weekly_saved.count, contracts_url(:status => "weekly_saved") %></p>
+            </td>
+            <td rowspan="3" width="10%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.weekly_posted.count, contracts_url(:status => "weekly_posted") %></p></td>
+            <td rowspan="3" width="14%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.weekly_proposed.count, contracts_url(:status => "weekly_proposed") %></p>                  </td>
+            <td rowspan="3" width="15%" align="center"><p>&nbsp;</p>
+              <p> <%= link_to current_user.weekly_recieved.count, contracts_url(:status => "weekly_recieved") %>              </p>                  </td>
+            <td rowspan="3" width="14%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.weekly_approved.count, contracts_url(:status => "weekly_approved") %></p>                  </td>
+            <td rowspan="3" width="14%" align="center"><p>&nbsp;</p>
+              <p><%= link_to Contract.weekly_recepient_contracts(current_user.id).count, contracts_url(:status => "weekly_recepient_contracts") %></p>                  </td>
+            <td rowspan="3" width="9%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.weekly_rejected.count, contracts_url(:status => "weekly_rejected") %></p>                  </td>
+          </tr>
+          <tr class="brb">
+            <td align="left">
+              <%= link_to t("create"), new_contract_path, :class => "link" %>
+            </td>
+          </tr>
+          <tr class="brb">
+            <td align="left">
+              <%= link_to t("contracts.contract_stats"), "", :class => "link" %>
+            </td>
+          </tr>
+          <tr>
+            <td align="left">
+              <%= link_to t("contracts.create_from_template"), contract_templates_url, :class => "link" %>
+            </td>
+            <td rowspan="3" width="14%" align="center"><p>&nbsp;</p>
+              <p>This Month</p>                  </td>
+            <td rowspan="3" width="16%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.monthly_saved.count, contracts_url(:status => "monthly_saved") %></p>                  </td>
+            <td rowspan="3" width="10%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.monthly_posted.count, contracts_url(:status => "monthly_posted") %></p>                  </td>
+            <td rowspan="3" width="14%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.monthly_proposed.count, contracts_url(:status => "monthly_proposed") %></p>                  </td>
+            <td rowspan="3" width="15%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.monthly_recieved.count, contracts_url(:status => "monthly_recieved") %></p>                  </td>
+            <td rowspan="3" width="14%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.monthly_approved.count, contracts_url(:status => "monthly_approved") %></p>                  </td>
+            <td rowspan="3" width="14%" align="center"><p>&nbsp;</p>
+              <p><%= link_to Contract.monthly_recepient_contracts(current_user.id).count, contracts_url(:status => "monthly_recepient_contracts") %></p>                  </td>
+            <td rowspan="3" width="9%" align="center"><p>&nbsp;</p>
+              <p><%= link_to current_user.contracts.monthly_rejected.count, contracts_url(:status => "monthly_rejected") %></p>                  </td>
+          </tr>
+          <tr>
+            <td align="left">
+              <%= link_to "#{t('view')}/#{t('edit')}", contracts_path, { :class => "link" } %>
+            </td>
+          </tr>
+          <tr class="brb">
+            <td width="8%" align="left">&nbsp;</td>
+          </tr>
+        </tbody></table>
+
+    </div>
+
+  </div>
+</div>

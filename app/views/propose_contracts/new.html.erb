@@ -1,0 +1,59 @@
+<div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <a href="http://wholebooks.rails-team.com/apps/index.html">Home </a> / <a href="http://wholebooks.rails-team.com/apps/contract_contracts.html">Contracts</a> / <a href="http://wholebooks.rails-team.com/apps/contract_view_edit_contract.html">View</a> / Propose Contract</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <%- form_for @propose_contract, :url => contract_propose_contracts_path(@contract), :html => { :method => :post } do |f| -%>
+            <div class="pagedivider">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl w30">
+                <h2><%= t("contracts.propose_contract") %></h2>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="w100 pt15">
+              <div class="w75 fl">
+                <div>
+      <%= f.error_messages %>
+    </div>
+                <div class="formw100">
+                  <% company = Company.find(@contract.recepient_company_id) %>
+                  <%= f.label :recipient_company, "Recipient Company:" %>
+                  <%= company.name %>
+                  <%= f.hidden_field :recipient_company, :value => company.name %>
+                  <%= f.hidden_field :recipient_company_id, :value => company.id %>
+                </div>
+                <div class="w100 pt15">
+                  <% user = User.find(@contract.recepient_id) %>
+                  <%= f.label :recipient, "Recipient Name:" %>
+                  <%=  user.email %>
+                  <%= f.hidden_field :recipient, :value => user.email %>
+                  <%= f.hidden_field :recipient_id, :value => user.id %>
+                </div>
+                <div class="w100 pt15">
+                  <%= f.label :description, "Message Title" %>
+                  <%= f.text_field :description, { :class => "big w100" } %>
+                </div>
+                <div class="w100 pt15">
+                  <%= f.label :message %>
+                  <%= f.text_area :message, { :rows => 6, :cols => "", :class => "big w100" } %>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+            </fieldset>
+
+        </div>
+        <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+          <div class="buttonCancel">
+              <input class="buttonSubmit" value="Cancel" tabindex="" type="submit">
+          </div>
+          <div class="buttonWrapper">
+              <input class="button" value="Propose" tabindex="" type="submit">
+          </div>
+          </div>
+      <%- end -%>
+      </div>
+  </div>

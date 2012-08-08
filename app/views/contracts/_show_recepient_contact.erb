@@ -1,0 +1,72 @@
+<div class="formItem w20">
+        <label>Client Company</label>
+        <div class="clear"></div>
+        <div class="pt10 pl5">
+          <div id="client_company">
+            <%#= f.select :client_company_id, collection_for_companies, { :include_blank => "Select"}, {:class => "big w100", 'data-href' => get_clients_contract_path(@contract)} %>
+          </div>
+        </div>
+        <% if @contract.new_record? %>
+        <div class="pt10 pl5">
+          <div id="recepient_client_company" style="display: none;">
+            <%#= f.text_field :recepient_client, :class => "big w100" %>
+          </div>
+        </div>
+        <% else %>
+          <% if @contract.client_company_id %>
+            <div class="pt10 pl5">
+          <div id="recepient_client_company">
+            <%#= f.text_field :recepient_client, :class => "big w100" %>
+          </div>
+        </div>
+          <% end %>
+        <% end %>
+</div>
+<div class="formItem w20 pr25">
+        <label>Client Contact</label>
+        <div class="clear"></div>
+        <div class="pt10 pl5">
+          <div id="clients">
+            <%#= f.select :client_id, collection_for_users, { :include_blank => "Select" }, :class => "big w100" %>
+          </div><!--<a href="http://wholebooks.rails-team.com/apps/contract_contracts_search.html" class="normal-link">Xavier&nbsp;Martin</a>-->
+        </div>
+        <% if @contract.new_record? %>
+        <div class="pt10 pl5">
+          <div id="recepient_client_contact" style="display: none;">
+            <%#= f.text_field :recepient_company, :class => "big w100" %>
+          </div><!--<a href="http://wholebooks.rails-team.com/apps/contract_contracts_search.html" class="normal-link">Xavier&nbsp;Martin</a>-->
+        </div>
+         <% else %>
+          <% if @contract.client_id %>
+            <div class="pt10 pl5">
+          <div id="recepient_client_contact">
+            <%#= f.text_field :recepient_company, :class => "big w100" %>
+          </div><!--<a href="http://wholebooks.rails-team.com/apps/contract_contracts_search.html" class="normal-link">Xavier&nbsp;Martin</a>-->
+        </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="formItem w20">
+        <label>Recipient Company</label>
+        <div class="clear"></div>
+        <div class="pt10 pl5">
+
+          <% @company = CompanyUser.find(:first, :conditions => ['user_id = ?', current_user.id], :order => 'created_at DESC') %>
+          <%=h @company.company.name %>
+          <%#= f.hidden_field :recepient_company_id, :value => @company.company.id  %>
+
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="formItem w20">
+        <label>Recipient Contact</label>
+        <div class="clear"></div>
+        <div class="pt10 pl5">
+
+          <%= h @company.company.user.name %>
+          <%#= f.hidden_field :recepient_id, :value => @company.company.user.id  %>
+
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>

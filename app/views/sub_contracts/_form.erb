@@ -1,0 +1,147 @@
+<% address = current_user.is_primary %>
+<div class="pagedivider">
+  <fieldset>
+    <div>
+      <%= f.error_messages %>
+    </div>
+    <div class="headingBg">
+      <div class="fl w30 pt5">
+        <h2>
+          <%= contract_type %>
+        </h2>
+      </div>
+      <div class="w70 fr">
+
+         <div class="w30 fl mgt10"><%= f.label :contract_number, t("contracts.contract_number") %>:&nbsp;</div>
+        <div class="form w30 fl">
+          <% if @contract.new_record? || params[:controller].eql?("sub_contracts") %>
+            <%= f.text_field :contract_number, :value => generate_contract_number(current_user) , :maxlength => "15",  :class => "big w100" %>
+          <% else %>
+            <%= @contract.contract_number %>
+          <% end %>
+
+        </div>
+
+         <% if params[:controller].eql?("sub_contracts") %>
+          <%= f.hidden_field :parent_id, { :value => @parent.id } %>
+          <div class="w40 fr mgt10"><%= label_tag "Parent Contract Number" %>:&nbsp;</div>
+          <div class="form w30 fr"><%= @parent.contract_number %></div>
+        <% end %>
+
+        <div class="w10 fl mgt10 pl10"><label for="status">Status&nbsp;:&nbsp;</label></div>
+        <div class="w10 mgt5 pt5 pl10 pb5 new fl">
+          <% if params[:controller].eql?("contracts") %>
+          <%= @contract.new_record? ? t("new") : @contract.status.capitalize%>
+          <% else %>
+          <%= t("new")  %>
+          <% end %>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="w100 fl pt25 pb25">
+      <div class="formItem w20 ">
+        <%= f.label :contract_type_id, t("contracts.contract_type") %>
+        <div class="w70 mgt5 mgr5 pt5 pl10 pb5 pr10 new ">
+          <%= contract_type.eql?('Create Contract') ? 'Standard' : 'Sub-Contract' %>
+        </div>
+      </div>
+      <%- if address.blank? -%>
+        <div class="formItem w15 pr25">
+          <%= f.label :country, t("contracts.choose_country") %>
+          <%= localized_country_select(:contract, :country, [], { :include_blank => 'Please choose...' },  { :class => "big w100"}) %>
+        </div>
+        <div class="formItem w15 pr25">
+          <%= f.label :state, t("contracts.choose_state") %>
+          <%= f.text_field :state, :class => "big w100" %>
+        </div>
+        <div class="formItem w10 pr25">
+          <%= f.label :city, t("contracts.choose_city") %>
+          <%= f.text_field :city, :class => "big w100" %>
+        </div>
+      <%- else -%>
+        <div class="formItem w15 pr25">
+          <%= f.label :country, t("contracts.choose_country") %>
+          <%= localized_country_select(:contract, :country, [address.country], { },  { :class => "big w100"}) %>
+        </div>
+        <div class="formItem w15 pr25">
+          <%= f.label :state, t("contracts.choose_state") %>
+          <%= f.text_field :state, :value => address.state, :class => "big w100" %>
+        </div>
+        <div class="formItem w10 pr25">
+          <%= f.label :city, t("contracts.choose_city") %>
+          <%= f.text_field :city, :value => address.city, :class => "big w100" %>
+        </div>
+      <%- end -%>
+      <div class="form fl w15">
+        <%= f.label :start_date, t("from") %>
+        <%= f.text_field :start_date, :value => (@contract.start_date.nil? ? @contract.start_date : @contract.start_date.strftime('%d/%m/%Y')) || Date.today.strftime('%d/%m/%Y'), :class => "big w70" %>
+      </div>
+      <div class="form fl w10">
+        <%= f.label :end_date, t("to") %>
+        <%= f.text_field :end_date, :value => (@contract.end_date.nil? ? @contract.end_date : @contract.end_date.strftime('%d/%m/%Y')) || Date.today.strftime('%d/%m/%Y'), :class => "big w80" %>
+      </div>
+    </div>
+    <div class="w100">
+      <div class="w75 fl">
+        <div class="w90">
+          <%= f.label :description %>
+          <%= f.text_field :description, :class => "big w100" %>
+        </div>
+        <div class="w90">
+          <% f.label :long_description, nil %>
+          <%= f.text_area :long_description, :class => "big w100" %>
+        </div>
+      </div>
+    </div>
+    <div class="formItemMedium">
+      <%= f.check_box :is_template %>
+      <%= f.label :is_template, "Use as a Template" %>
+    </div>
+    <div class="formItemMedium">
+      <%= f.check_box :hide  %>
+      <%= f.label :hide, "Hide from Home Page" %>
+    </div>
+    
+    <div class="formItemMedium">
+      <%= f.check_box :is_recipient, { :readonly => @contract.new_record? ? false : true,  'data-href' =>  recipient_detail_path } %>
+      <%= f.label :is_recipient, "Recipient Created" %>
+    </div>
+    
+
+    <div class="formItemMedium">
+    <label for="checkbox">
+      <%# url = @contract.new_record? ? new_contract_timesheet_option_path(@contract, :contract_type => contract_type.eql?('Create Contract') ? 'standard' : 'sub-contract') : edit_contract_timesheet_option_path(@contract, :contract_type => contract_type.eql?('Create Contract') ? 'standard' : 'sub-contract') %>
+      <%= link_to "Timesheets Options", new_timesheet_option_path(@contract) %>
+    </label>
+    </div>
+    <div class="formItemMedium">
+      <!-- <label for="checkbox"> <a href="http://wholebooks.rails-team.com/apps/contract_expenses_options.html">Expenses Options</a></label>-->
+    </div>
+    <div class="w100 fl pt10 pb10">
+      <% if @contract.new_record? %>
+      <div id="normal_contract">
+          <%= render :partial => "contracts/normal_contact", :locals => { :f => f }  %>
+        </div>
+       <div id="recepient_contract" >
+          <%#= render :partial => "recepient_contact", :locals => { :f => f }  %>
+        </div>
+      <% else %>
+        <% if @contract.is_recipient? %>
+          <%= render :partial => "contracts/recepient_contact", :locals => { :f => f }  %>
+        <% else %>
+          <%= render :partial => "contracts/normal_contact", :locals => { :f => f }  %>
+        <% end %>
+      <% end %>
+    </div>
+  </fieldset>
+</div>
+
+<div class="pagedivider pb15">
+  <%= render "contracts/new_timesheet_defaults", :c => f %>
+</div>
+
+<div class="pagedivider pb15">
+  <%= render "contracts/invoice_defaults", :c => f %>
+</div>
+

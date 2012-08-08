@@ -1,0 +1,1 @@
+<%= select("timesheet", "time_unit_id",  @time_units.collect {|i| [i.name, i.id]}, {:prompt => true}, {:class => "big w100"}) %>

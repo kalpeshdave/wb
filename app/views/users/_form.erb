@@ -1,0 +1,46 @@
+<div class="w100">
+  <div class="form fl w40 pl25 pt15">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, :class => "big w80" %>
+  </div>
+  <div class="form fl w40 pl25 pt15">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, :class => "big w80" %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="w100">
+  <div class="form fl w40 pl25 pt15">
+    <%= form.label :email, t("email_address") %>
+    <%= form.text_field :email, :class => "big w80" %>
+  </div>
+  <div class="form fl w35 pl25 pt15">
+    <%= form.label :password, form.object.new_record? ? nil : "Change password" %>
+    <%= form.password_field :password, :class => "big w90" %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="w100">
+  <div class="form fl w40 pl25 pt15">
+    <%= form.label :password_confirmation, "Re-Enter Password" %>
+    <%= form.password_field :password_confirmation, :class => "big w80" %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="w100">
+  <div class="form fl w40 pl25 pt15">
+    <%= form.label :secret_question_id, t("users.choose_question") %>
+    <%= form.select :secret_question_id, SecretQuestion::NAMES, {:prompt => "Select A Question"}, {:class => "big w80"} %>
+  </div>
+  <div class="form fl w35 pl25 pt15">
+    <%= form.label :secret_answer, t("users.choose_answer") %>
+    <%= form.text_field :secret_answer, :class=> "big w90" %>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="formItem w100 pt10 pl20">
+    <%= form.check_box :agreement, :class => "small" %>
+    <%= t("signup.agreement") %>
+  </div>
+

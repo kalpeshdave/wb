@@ -1,0 +1,16 @@
+<h1>Update your password</h1>
+
+<p>Please enter the new password below and then press "Update Password".</p>
+
+<% form_for @user, :url => password_reset_path, :html => {:method => :put, :id => nil} do |f| %>
+<% f.error_messages %>
+  <div class="formItem w25 pt15 pr15">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, :class => "big w100" %>
+          </div>
+          <div class="formItem w25 pt15 pr15">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, :class => "big w100" %>
+          </div>
+  <%= f.submit "Update Password" %>
+<% end %>

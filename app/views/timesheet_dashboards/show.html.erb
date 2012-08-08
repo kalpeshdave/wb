@@ -1,0 +1,70 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <a href="index.html">Home </a> / Timesheets</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <div class="pagedivider pb25 pt25">
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Timesheets</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table cellpadding="0" cellspacing="0" class="contract">
+            <tbody>
+              <tr class="brb">
+                <td colspan="7" align="center" class="trhead">Timesheet Activity</td>
+                <td align="center" class="trhead"><a href="timesheet_configuregrid.html">Configure</a></td>
+              </tr>
+              <tr class="brb">
+                <td align="center" class="trhead"><strong><a href="timesheet_actions.html"> Action</a></strong></td>
+                <td align="center" class="trhead"><strong> <a href="timesheet_time_increments.html">Time</a></strong></td>
+                <td align="left" class="trhead" ><div align="center"><strong>Saved</strong></div></td>
+                <td align="center" class="trhead" ><strong>Submitted</strong></td>
+                <td width="15%" align="center" class="trhead"><strong>Received</strong></td>
+                <td width="14%" align="center" class="trhead"><strong>Approved</strong></td>
+                <td width="9%" align="center" class="trhead"><strong>Rejected</strong></td>
+              </tr>
+              <tr>
+                <td width="8%" align="left"><%= link_to "Defaults", edit_user_timesheet_preference_path(current_user), :class => "link" %></td>
+                <td width="14%" rowspan="2" align="center" valign="middle">
+                  <p>This Week</p></td>
+                <td width="16%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.weekly_incomplete.count, timesheets_url(:status => "weekly_incomplete") %></p></td>
+                <td width="10%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.weekly_submitted.count, timesheets_url(:status => "weekly_submitted") %></p></td>
+                <td width="15%" rowspan="2" align="center">
+                  <p><%= link_to current_user.weekly_rec_timesheet.count, timesheets_url(:status => "weekly_rec_timesheet") %></p></td>
+                <td width="14%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.weekly_approved.count, timesheets_url(:status => "weekly_approved") %></p></td>
+                <td width="9%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.weekly_rejected.count, timesheets_url(:status => "weekly_rejected") %></p></td>
+              </tr>
+              <tr  class="brb">
+                <td align="left"><%= link_to "Create", new_timesheet_path, :class => "link" %></td>
+              </tr>
+              <tr>
+                <td align="left"><%= link_to "View/Edit", timesheets_path, :class => "link" %></td>
+                <td width="14%" rowspan="2" align="center">
+                  <p>This Month</p></td>
+                <td width="16%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.monthly_incomplete.count, timesheets_url(:status => "monthly_incomplete") %></p></td>
+                <td width="10%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.monthly_submitted.count, timesheets_url(:status => "monthly_submitted") %></p></td>
+                <td width="14%" rowspan="2" align="center">
+                  <p><%= link_to current_user.monthly_rec_timesheet.count, timesheets_url(:status => "monthly_rec_timesheet") %></p></td>
+                <td width="15%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.monthly_approved.count, timesheets_url(:status => "monthly_approved") %></p></td>
+                <td width="14%" rowspan="2" align="center">
+                  <p><%= link_to current_user.timesheets.monthly_rejected.count, timesheets_url(:status => "monthly_rejected") %></p></td>
+              </tr>
+              <tr  class="brb">
+                <td width="8%" align="left">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>

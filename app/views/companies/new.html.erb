@@ -1,0 +1,65 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to "Home", root_url %> / <%= link_to "My Profile", account_url %> / Company Profile</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <% form_for @company, :url => companies_path do |f| %>
+         <%= f.error_messages %>
+        <div class="pagedivider">
+          <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Company Profile</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          <div class="formItem w20 pr25 pt15 pb15">
+            <label for="firstname">Company Name</label>
+             <%= f.text_field :name, :class => "big w100" %>
+          </div>
+          <div class="formItem w20 pr25 pt15 pb15">
+            <label for="companyname">Website</label>
+            <%= f.text_field :url, :class => "big w100" %>
+          </div>
+          <div class="clear"></div>
+          </fieldset>
+        </div>
+        <div class="pagedivider">
+          
+        <fieldset>
+        <div class="headingBg">
+          <div class="fl">
+            <h2>Addressess</h2>
+          </div>
+          <div class="fr">
+            <div id="add_company_address"> <span class="addAttachIn"><a href="#">Add</a></span></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+          <div class="pagedivider5 pb25">
+          <fieldset>
+            <div id="addresses">
+            <%= render :partial => 'address', :collection => @company.addresses %>
+              </div>
+           </fieldset>
+        </div>
+        <div class="buttonMainWrapper pt25">
+        <div class="buttonCancel">
+       <!-- <form id="form1" name="form1" method="post" action="profile_profile.html">
+          <input type="submit" class="buttonSubmit" value="Cancel" tabindex="" />
+        </form>-->
+      </div>
+     
+      <div class="buttonWrapper">
+          <%= f.submit "Save", :class => "button"  %>
+      </div>
+    </div>
+    </fieldset>
+         
+  </div>
+<% end %>
+</div>
+</div>

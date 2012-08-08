@@ -1,0 +1,30 @@
+<fieldset>
+  <div class="headingBg">
+    <div class="fl">
+      <h2>Contract History</h2>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <table width="100%" border="1" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr class="head">
+        <td width="27%" align="left"><strong>Date</strong></td>
+        <td width="15%" align="center"><strong>Action</strong></td>
+        <td width="17%" align="center"><strong>User</strong></td>
+      </tr>
+      <% @contract.versions.uniq.each do |c| %>
+        <tr>
+          <td><%= h c.updated_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+          <td align="center">
+            <%=h c.status.capitalize  %>
+          </td>
+          <td>
+            <div align="center">
+              <% name = c.status.eql?("approved") || c.status.eql?("rejected") ? c.contract.recepient.name : c.contract.creator.name  %>
+              <%= h name %>
+            </div>
+          </td>
+        </tr>
+      <%- end -%>
+    </tbody></table>
+</fieldset>

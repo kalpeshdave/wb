@@ -1,0 +1,32 @@
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"> 
+    <%= link_to t("home"), root_path %> / <%= link_to "Contracts", contracts_path %> / Contract Defaults</div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <%- form_for current_user, :url => user_contract_preference_path(current_user) do |f| -%>
+    <%= f.error_messages %>
+      <div class="pagedivider pb25">
+        <%= render "contract_defaults", :u => f %>
+      </div>
+
+      <div class="pagedivider pb15">
+        <%= render "timesheet_defaults", :u => f %>
+      </div>
+
+      <div class="pagedivider pb15">
+        <%= render "invoice_defaults", :u => f %>
+      </div>
+
+      <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+        <div class="buttonCancel">
+         <%= link_to "Cancel", contract_dashboard_url %>  <!--<input class="buttonSubmit" value="Cancel" tabindex="" type="submit" />-->
+        </div>
+        <div class="buttonWrapper">
+          <input class="button" value="Save" tabindex="" type="submit" />
+        </div>
+      </div>
+    <%- end -%>
+  </div>
+</div>

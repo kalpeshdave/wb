@@ -1,0 +1,30 @@
+ <!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to t("home"), root_path %> /<%= link_to "Timesheets", timesheet_dashboard_path %>/ Timesheet Defaults</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <%- form_for current_user, :url => user_timesheet_preference_path(current_user) do |f| -%>
+        <%= f.error_messages %>
+          <div class="pagedivider-timesheet pb15">
+            <fieldset>
+
+              <%= render "timesheet_defaults", :u => f %>
+
+            </fieldset>
+          </div>
+
+        <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+          <div class="buttonCancel">
+            <%= link_to "Cancel", timesheet_dashboard_url, :class => "buttonSubmit" %>
+          </div>
+          <div class="buttonWrapper">
+            <%= f.submit "Save", :class => "button" %>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <%- end -%>
+        
+      </div>
+    </div>

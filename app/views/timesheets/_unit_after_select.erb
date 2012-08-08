@@ -1,0 +1,6 @@
+<%# time_unit_value = current_user.timesheet_default.time_base.nil? ? [] : time_units(current_user.timesheet_default.time_base.id) %>
+<% if time_base(@contract) %>
+<%= select("timesheet", "time_unit_id", time_units(time_base(@contract)[0][1]), {:prompt => "Please Select", :selected => time_base(@contract)[1][1] }, { :class => "big w100" }) %>
+<% else %>
+<%= select("timesheet", "time_unit_id", [], {:prompt => "Please Select"  }, { :class => "big w100" }) %>
+<% end %>

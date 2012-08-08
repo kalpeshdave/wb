@@ -1,0 +1,94 @@
+<% time_base = current_user.timesheet_default.time_base ? current_user.timesheet_default.time_base.name : "" %>
+<div class="pagedivider">
+  <fieldset>
+    <div>
+      <%= f.error_messages %>
+    </div>
+    <div class="headingBg">
+      <div class="fl w30">
+        <h2><%= t("timesheets.create_timesheet") %></h2>
+      </div>
+      <div class="w20 fr">
+        <div class="w15 mgt5 mgr5 pt10 pl10 pb5 pr10 new fl"><%= @timesheet.new_record? ? t("new") : @timesheet.status.capitalize%></div>
+        <div class="form w60 fl">
+          <% if @timesheet.new_record?  %>
+            <%= f.text_field :timesheet_number, :value => generate_timesheet_number(current_user) ,:maxlength => "16", :class => "big w100" %>
+          <% else %>
+            <%= @timesheet.timesheet_number %>
+          <% end %>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="w100 fl pt25 pb25 ">
+      <div class="formItem w15 pr15">
+        <%= f.label :contract_id, t("timesheets.select_contract") %>
+        <%= f.select(:contract_id, @contracts.map { |i| [i.contract_number, i.id] }, { :prompt => "Select"}, {:class => "big w100", 'data-href' => fetch_contract_values_timesheets_path}) %>
+      </div>
+      
+      <div id="wholebooks-timesheet-create">
+        <% if @timesheet.new_record? %>
+          <%= render 'timesheets/before_contract_select', :f => f %>
+        <% else %>
+          <div class="formItem w20 pr15">
+            <label for="country">Contract Description</label>
+            <input type="text" class="big w100" id="contract_description" value="<%= @timesheet.try(:contract).try(:description) %>" />
+          </div>
+          <div class="formItem w20 pr15">
+            <%= f.label :time_base_id, t("timesheets.time_base") %>
+            <%= f.select(:time_base_id, TimeBase.all.map { |t| [t.name, t.id] }, { :include_blank => "Select", :selected => @timesheet.time_base_id  }, { :class => "big w100" }) %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="formItem w20 pr15">
+        <%= f.label :start_date, t(:begin_date) %>
+        <%= f.text_field :start_date, :value => @timesheet.start_date || Date.today, :class => "big w100"  %>
+      </div>
+      <div class="formItem w15 pr15">
+        <%= f.label :end_date, t(:end_date) %>
+        <%= f.text_field :end_date, :value => @timesheet.end_date || @timesheet.set_end_date(time_base), :readonly => true, :class => "big w100"  %>
+      </div>
+    </div>
+    <div class="w100">
+      <div class="w60 fl">
+        <div class="w90">
+          <%= f.label :description %>
+          <%= f.text_area :description, {:size => "20x5", :class => "big w100"}  %>
+        </div>
+      </div>
+    </div>
+    <div class="formItem w20 pr15">
+      <%= f.check_box :hide  %>
+      <%= f.label :hide, "Hide from Home Page" %>
+    </div>
+    <div class="w15 fr">
+      <%= f.label :time_unit_id, "TIme Unit" %>
+      <div id="time_units">
+        <% if @timesheet.new_record? %>
+          <%= render 'timesheets/unit_before_select', :f => f %>
+        <% else %>
+          <% time_unit_value = @timesheet.time_base.nil? ? (@timesheet.time_unit.nil? ? [["Please Select", ""]] : [[@timesheet.time_unit.name, @timesheet.time_unit.id]]) : time_units(@timesheet.time_base.id) %>
+          <%= f.select(:time_unit_id, time_unit_value, {:prompt => "Please Select",:selected => @timesheet.time_unit_id  }, { :class => "big w100" }) %>
+        <% end %>
+        </div>
+    </div>
+    
+      <div class="clear"></div>
+  </fieldset>
+</div>
+<div class="pagedivider pb15">
+  <fieldset>
+    <div class="headingBg">
+      <div class="fl">
+        <h2><%= t(:calender) %></h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div>
+  <div id='calendar'>
+  </div>
+</div>
+  </fieldset>
+</div>

@@ -1,0 +1,181 @@
+en:
+  activerecord:
+    errors:
+      # The values :model, :attribute and :value are always available for interpolation
+      # The value :count is available when applicable. Can be used for pluralization.
+      messages:
+        inclusion: "is not included in the list"
+        exclusion: "is reserved"
+        invalid: "is invalid"
+        confirmation: "doesn't match confirmation"
+        accepted: "must be accepted"
+        empty: "can't be empty"
+        blank: "can't be blank"
+        too_long: "is too long (maximum is %{count} characters)"
+        too_short: "is too short (minimum is %{count} characters)"
+        wrong_length: "is the wrong length (should be {{count}} characters)"
+        taken: "has already been taken"
+        not_a_number: "is not a number"
+        greater_than: "must be greater than {{count}}"
+        greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+        equal_to: "must be equal to {{count}}"
+        less_than: "must be less than {{count}}"
+        less_than_or_equal_to: "must be less than or equal to {{count}}"
+        odd: "must be odd"
+        even: "must be even"
+        record_invalid: "Validation failed: {{errors}}"
+        # Append your own errors here or at the model/attributes scope.
+
+      full_messages:
+        format: "%{attribute} %{message}"
+
+  email_address: "Email Address"
+  home: "Home"
+  sign_up: "Sign Up"
+  new: "New"
+  from: "From"
+  to: "To"
+  configure: "Configure"
+  action: "Action"
+  time: "Time"
+  save: "Save"
+  posted: "Posted"
+  sent: "Sent"
+  proposed: "Proposed"
+  received: "Received"
+  approved: "Approved"
+  client_approved: "Client Approved"
+  recepient_approved: "Recipient Approved"
+  rejected: "Rejected"
+  defaults: "Defaults"
+  create: "Create"
+  view: "View"
+  edit: "Edit"
+  description: "Description"
+  status: "Status"
+  currency: "Currency"
+  recipient: "Recipient"
+  message: "Message"
+  begin_date: "Begin Date"
+  end_date: "End Date"
+  calender: "Calender"
+  attachments: "Attachments"
+  phone_number: "Phone Number"
+  contact_information: "Contact information"
+
+  sigin_in:
+    login_success: "Login successful!"
+    logout_success: "Logout successful!"
+    
+  signup:
+    success: "Your account has been created. Please check your e-mail for your account activation instructions!"
+    agreement: "Yes, I agree to the Terms of Service and Privacy Policy"
+    security_code: "Enter Security Code"
+    signup_header: "Signup for WholeBooks"
+    singup_button: "Join Whole Books Now"
+
+  users:
+    success_update: "Your Account updated!"
+    success_contact_update: "Your Contact Information successfully updated!"
+    password_success: "Password successfully updated"
+    choose_question: "Choose Security Question"
+    choose_answer: "Your Answer"
+
+  password_resets:
+    success: "Instructions to reset your password have been emailed to you. Please check your email."
+    failure: "Secret answer does not match Please try again."
+    failure_update: "We're sorry, but we could not locate your account. "
+
+  companies:
+    success: "Company was added successfully!"
+    success_update: "Your Company Profile has been updated!"
+    
+  contracts:
+    name: "Contracts"
+    contract_number: "Contract Number"
+    create_contract: "Create Contract"
+    create_sub_contract: "Create Sub-Contract"
+    contract_type: "Contract Type"
+    choose_country: "Choose Country"
+    choose_state: "Choose State"
+    choose_city: "Choose City"
+    success: "Contract is successfully created."
+    contract_activity: "Contract Activity"
+    contract_stats: "Contract Stats"
+    create_from_template: "Create from Template"
+    success_contract_preferences: "Contract preferences is updated successfully"
+    error: "There is some error please try after some time."
+    update_success: "Contract is updated successfully."
+    propose_contract: "Propose Contract"
+    contract_default:
+      contract_defaults: "Contract Defaults"
+      allow_timeSheets: "Allow TimeSheets"
+      allow_expenses: "Allow Expenses"
+      require_timesheet_signature: "Require Timesheet Signature"
+      require_expense_approval: "Require Expense Approval"
+      contract_prefix: "Contract Prefix"
+      auto_number_contracts: "Auto-number Contracts"
+      last_contract_number: "Last Contract Number"
+    timesheet_default:
+      timesheet_defaults: "Timesheet Defaults"
+      timesheets_entered_each: "Timesheets entered each"
+      time_unit: "Time Unit"
+      default_value: "Default Value"
+    invoice_default:
+      invoice_defaults: "Invoice Defaults"
+
+  payments:
+    payment_terms: "Payment Terms"
+    rate: "Rate"
+
+  search_contracts:
+     success: "Search Critieria is successfully created."
+     success_update: "Search Critieria successfully updated!"
+
+  search_contractors:
+     success: "Search Critieria is successfully created."
+     success_update: "Search Critieria successfully updated!"
+
+  timesheets:
+    time_base: "Time Base"
+    select_contract: "Select Contract"
+    contract_description: "Contract Description"
+    create_timesheet: "Create Timesheet"
+    name: "Contracts"
+    success: "Timesheet is successfully created."
+    submit_success: "Timesheet is successfully submitted."
+    update_success: "Timesheet is updated successfully."
+    success_timesheet_preferences: "Timesheet preferences is updated successfully"
+    timesheet_default:
+      timesheet_defaults: "Timesheet Defaults"
+      timesheet_prefix: "Timesheet Prefix"
+      auto_number_timesheets: "Auto-number Timesheets"
+      last_timesheet_number: "Last Timesheet Number"
+      
+      # You can define own errors for models or model attributes.
+      # The values :model, :attribute and :value are always available for interpolation.
+      #
+      # For example,
+      #   models:
+      #     user:
+      #       blank: "This is a custom blank message for {{model}}: {{attribute}}"
+      #       attributes:
+      #         login:
+      #           blank: "This is a custom blank message for User login"
+      # Will define custom blank validation message for User model and
+      # custom blank validation message for login attribute of User model.
+      #models:
+
+    # Translate model names. Used in Model.human_name().
+    #models:
+      # For example,
+      #   user: "Dude"
+      # will translate User model name to "Dude"
+
+    # Translate model attribute names. Used in Model.human_attribute_name(attribute).
+    #attributes:
+      # For example,
+      #   user:
+      #     login: "Handle"
+      # will translate User attribute "login" as "Handle"
+

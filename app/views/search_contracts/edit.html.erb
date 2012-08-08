@@ -1,0 +1,92 @@
+ <!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to "Home", root_url %> / <%= link_to "Search", search_contracts_url %>/ Contracts / Criteria</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <% form_for @search_contract, :url =>  search_contract_url(@search_contract)  do |f| %>
+          <div class="pagedivider1 pb25">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl  pt10">
+                <h2>Contracts Search Criteria</h2>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div class="w80 pl25">
+              <div class="formItem w20 pt15 pr15 pb15">
+                <label for="loginemail">Agent</label>
+                <div class="w100 pt10">
+                  <% if current_user.company_users.blank?  %>
+                    <%= link_to "Select Company", companies_url %>
+                  <% else %>
+                    <% @company = CompanyUser.find(:first, :conditions => ['user_id = ?', current_user.id], :order => 'created_at DESC') %>
+                      <%= link_to @company.company.name, change_company_url(@company.company) %>
+                    <% end %>
+                </div>
+              </div>
+              <div class="formItem w20 pt15 pr15 pb15">
+                <label for="loginemail">Client</label>
+                <div class="w100 pt10"><%= link_to current_user.name, account_url %></div>
+              </div>
+              <div class="formItem w20 pt15 pr15 pb15"> <a href="#" class="link">Use Saved Search</a> </div>
+              <div class="formItem w20 pt15 pr15 pb15"> <a href="#" class="link">Import Notification Profile</a> </div>
+            </div>
+            <div class="clear"></div>
+            <div class="w100">
+              <div class="fl w50">
+                <div class="formItem w40 pt15 pr15 pb15">
+                  <label for="loginemail">Date Submitted From</label>
+                  <%= f.text_field :submitted_from, :class => "big w100" %>
+                </div>
+                <div class="formItem w40 pt15 pr15 pb15">
+                  <label for="loginemail">Date Submitted To</label>
+                  <%= f.text_field :submitted_to, :class => "big w100" %>
+                </div>
+                <!--<div class="formItem w40 pt15 pr15 pb15">
+                  <label for="loginemail">Date Needed From</label>
+                  <input type="text" value="00/00/2011" id="loginemail" class="big w100"/>
+                </div>
+                <div class="formItem w40 pt15 pr15 pb15">
+                  <label for="loginemail">Date Needed To</label>
+                  <input type="text" value="00/00/2011" id="loginemail" class="big w100"/>
+                </div>-->
+                <div class="formItem w40 pt15 pr15 pb15">
+                  <label for="loginemail">Rate From</label>
+                  <%= f.text_field :rate_from, :class => "big w100" %>
+                </div>
+                <div class="formItem w40 pt15 pr15 pb15">
+                  <label for="loginemail">Rate To</label>
+                  <%= f.text_field :rate_to, :class => "big w100" %>
+                </div>
+              </div>
+              <div class="fl w50">
+                <table width="100%" border="1" cellspacing="0" cellpadding="0">
+                  <tr class="head">
+                    <td width="42%" align="left"><strong>Country</strong></td>
+                    <td width="51%" align="center"><strong>State</strong></td>
+                    <td width="51%" align="center"><strong>City</strong></td>
+                    <td width="7%"><div id="add_search_place"><div class="addAttachIn">Add</div></div></td>
+                  </tr>
+                  <tbody id="places">
+                    <%= render :partial => 'place', :collection => @search_contract.places %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            </fieldset>
+          </div>
+
+        <div class="buttonMainWrapper">
+          <div class="buttonWrapper">
+            <%= f.submit "Update Search Criteria", :class => "button" %>
+          </div>
+          <div class="buttonWrapper">
+            <%= link_to "Search", search_contract_url(@search_contract),:class => "button1" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>

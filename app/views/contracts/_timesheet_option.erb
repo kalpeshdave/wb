@@ -1,0 +1,16 @@
+<%
+p "xxxxxxxxxxxxxx"
+p timesheet_option
+p "xxxxxxxxxxxxxx"
+%>
+<tr class="">
+  <%- fields_for_task(timesheet_option, "timesheet_option") do |t| -%>
+    <%= hidden_field_tag 'timesheet_option[]id', timesheet_option.id %>
+    <%# if timesheet_option.new_record? %>
+      <td  align="left" width="26%"><%= select_tag('timesheet_option[]user_id', options_from_collection_for_select(@users, "id", "name"), :class => "big w100") %></td>
+      <td align="center" width="37%"></td>
+      <td align="center" width="29%"><%= select_tag('timesheet_option[]visibility', options_for_select([["View Only", "view_only"], ["Approver", "approver"]], timesheet_option.visibility),  :class => "big w100") %></td>
+      <td align="center" width="8%"><%= link_to_function image_tag("canel.png"), "$('.cancelButton').live('click',function() {$(this).parents('tr:first').remove();});", :class => "cancelButton" %></td>
+    </tr>
+  <%#- end -%>
+<%- end -%>

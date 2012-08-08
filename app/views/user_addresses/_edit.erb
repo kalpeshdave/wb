@@ -1,0 +1,76 @@
+<div class="pagedivider5 pb25 wholebook-add-address-div">
+  <%- form_for @address, :url => user_address_path(@address), :html => { :id => 'wholebooks-update-address', :method => :put } do |add| -%>
+    <%= error_messages_for :address %>
+    <fieldset>
+      <div class="w100 fl">
+
+        <div class="w20 pl25 fl">
+          <div class="formItem w100 pt15">
+            <!--label for="checkbox1">
+              <%#= add.check_box(:address_type, :checked => true, :class => "small")  %>
+              Primary Address</label-->
+          </div>
+        </div>
+        <div class="w50 fl">
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address Type</label>
+            <%= add.select(:address_type, { "Billing Address" => "billing_address", "Mailing Address" => "mailing_address", "Primary Address" => "primary_address" }) %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address Description</label>
+            <%= add.text_field :address_description, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address 1</label>
+            <%= add.text_field :address_1, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address 2</label>
+            <%= add.text_field :address_2, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">City</label>
+            <%= add.text_field :city, :class => "big w100" %>
+          </div>
+          <div class="formItem w40 pt15">
+            <label for="companyname">Postal Code</label>
+            <%= add.text_field :zipcode, :class => "big w100" %>
+          </div>
+          <div class="formItem w50 pt15">
+            <label for="companyname">State</label>
+            <%= add.text_field :state, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Country</label>
+            <%= add.localized_country_select(:country, [], {:include_blank => 'Please choose...'},  { :class => "big w100"}) %>
+          </div>
+        </div>
+      </div>
+      <div class="fr pr25">
+        <%= add.submit "Update" %>
+        <%= link_to "Cancel", "javascript:void(0);", { :id => 'wholebooks-cancel-update-address' } %>
+      </div>
+    </fieldset>
+  <%- end -%>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("#wholebooks-update-address").submit(function() {
+        $(this).ajaxSubmit({
+          dataType: 'json',
+          success: function(response) {
+            if (response.success == true) {
+              $("#wholebook-edit-address-"+response.address_id).html('');
+              $("#wholebook-show-address-"+response.address_id).show('slow', function() {
+                $(this).html(response.data);
+              });
+            } else {
+              $("#wholebook-show-address-"+response.address_id).html(response.data);
+            }
+          }
+        });
+        return false;
+    });
+});
+</script>

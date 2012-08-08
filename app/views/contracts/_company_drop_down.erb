@@ -1,0 +1,35 @@
+<div class="formItem w20">
+  <label>Client Company</label>
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <div id="client_company">
+      <div id="wholebooks-single-company">
+        <%= select("contract", "client_company_id", collection_for_companies) %>
+      </div>
+    </div>
+  </div>
+        <div class="pt10 pl5">
+          <div id="recepient_client_company" style="display: none;">
+            <%= text_field_tag "recepient_company", "", :class => "big w100" %>
+          </div>
+        </div>
+       
+</div>
+<div class="formItem w20 pr25">
+  <label>Client Contact</label>
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <div id="client_contact">
+      <%- user = user_index -%>
+      <%= select "contract", "client_id", collection_for_users, {}, { :class => "big w100" } %>
+    </div>
+  </div>
+
+ 
+        <div class="pt10 pl10">
+          <div id="recepient_client_contact" style="display: none;">
+            <%= text_field_tag "recepient_client", "", :class => "big w100" %>
+          </div>
+        </div>
+ 
+</div>

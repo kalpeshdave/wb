@@ -1,0 +1,31 @@
+<%- u.fields_for :invoice_default_attributes, current_user.invoice_default do |f| -%>
+  <%= f.hidden_field :id  %>
+  <fieldset>
+    <div class="headingBg">
+      <div class="fl">
+        <h2><%= t("contracts.invoice_default.invoice_defaults") %></h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="form w20 pr15 pt15 fl">
+      <%= f.label :payment_term_id, t("payments.payment_terms") %>
+      <%= f.select(:payment_term_id, PaymentTerm::NAMES, { :include_blank => "Select" }, {:class => "big w100"}) %>
+    </div>
+
+    <div class="form w20 pr15 pt15 fl">
+      <%= f.label :rate %>
+      <%= f.text_field :rate, { :class => "big w100" } %>
+    </div>
+
+    <div class="form w20 pr25 pt15 fl">
+      <%= f.label :unit_quantity %>
+      <%= f.text_field :unit_quantity, { :class => "big w100" } %>
+    </div>
+
+    <div class="form w20 pr25 pt15 fl">
+      <%= f.label :currency_id, t("currency") %>
+      <%= f.select(:currency_id, Currency.all.map { |i| [i.iso_name, i.id] }, { :include_blank => "Select" }, {:class => "big w100"}) %>
+    </div>
+  </fieldset>
+<%- end -%>

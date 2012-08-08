@@ -1,0 +1,2 @@
+<% time_unit_value = current_user.timesheet_default.time_base.nil? ? [] : time_units(current_user.timesheet_default.time_base.id) %>
+<%= select("timesheet", "time_unit_id", time_unit_value, {:prompt => "Please Select", :selected => current_user.timesheet_default.time_unit_id  }, { :class => "big w100" }) %>

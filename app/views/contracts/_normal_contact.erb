@@ -1,0 +1,22 @@
+<div id="wholebooks-client-detail">
+  <%= render "contracts/default_company", :f => f %>
+</div>
+
+<div class="formItem w20">
+  <label>Recipient Company</label>
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <%= f.select(:recepient_company_id, Company.all.map { |i| [i.name, i.id] }, {:prompt => "Please Select"}, {:class => "big w100", 'data-href' => get_recipients_contract_path(@contract)}) %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="formItem w20">
+  <label>Recipient Contact</label>
+  <div class="clear"></div>
+  <div class="recipients pt10 pl5">
+    <% recepient = @contract.recepient ? [["#{@contract.recepient.name}", "#{@contract.recepient.id}"]] : [] %>
+    <%= f.select(:recepient_id, recepient, {:prompt => "Please Select"}, {:class => "big w100"}) %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="clear"></div>

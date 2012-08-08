@@ -1,0 +1,73 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to t("home"), root_url %> / <%= link_to "My Profile", account_url %> / Company Profile</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <% form_for @company, :url => company_url(@company) do |f| %>
+         <%= f.error_messages %>
+        <div class="pagedivider">
+          <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Company Profile</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          <div class="formItem w20 pr25 pt15 pb15">
+            <label for="firstname">Company Name</label>
+             <%= f.text_field :name, :class => "big w100" %>
+          </div>
+          <div class="formItem w20 pr25 pt15 pb15">
+            <label for="companyname">Website</label>
+            <%= f.text_field :url, :class => "big w100" %>
+          </div>
+          <div class="clear"></div>
+          </fieldset>
+        </div>
+        <div class="clear"></div>
+         <fieldset>
+        <div class="headingBg">
+          <div class="fl">
+            <h2>Addressess</h2>
+          </div>
+          <%- if @company.current_user_is_owner?(current_user.id) -%>
+            <div class="fr">
+              <!--div id="add_address"> <span class="addAttachIn"><a href="#">Add</a></span></div-->
+              <div id="add_company_address"> <span class="addAttachIn"><a href="#">Add</a></span></div>
+            </div>
+          <%- end -%>
+          <div class="clear"></div>
+        </div>
+          <div class="pagedivider5 pb25">
+
+        <fieldset>
+        <div id="addresses">
+          <%#  raise @company.addresses.inspect %>
+            <%= render :partial => 'address', :collection => @company.addresses %>
+              </div>
+           </fieldset>
+           
+        </div>
+        <div class="buttonMainWrapper pt25">
+        <div class="buttonWrapper">
+        <%= link_to "Select Another Company", companies_url, :class => "link" %>
+      </div>
+
+      <div class="buttonWrapper">
+          <%= f.submit "Update", :class => "button"  %>
+      </div>
+      <div class="buttonWrapper">
+          <%= link_to "Use",  use_company_url(@company), :class => "button"   %>
+      </div>
+
+
+    </div>
+    </fieldset>
+
+  </div>
+<% end %>
+</div>
+</div>

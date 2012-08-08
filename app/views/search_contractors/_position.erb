@@ -1,0 +1,16 @@
+<tr class="position">
+  <% fields_for_task(position, "position") do |p| %>
+    <% if position.new_record? %>
+      <td align="center" width="37%"><%= p.text_field :name, :class => "big w100" %></td>
+      <td align="center">
+        <%= link_to_function image_tag("canel.png"), "$('.cancelButton').live('click',function(){$(this).parents('tr:first').remove();});", :class => "cancelButton" %>
+      </td>
+    <% else %>
+      <td align="center" width="37%"><%=h position.name %></td>
+      <td align="center">
+       <%#= link_to image_tag("canel.png"), delete_skill_user_path(skill), :class => "cancelButton"  %>
+      </td>
+    <% end %>
+
+  <% end %>
+</tr>

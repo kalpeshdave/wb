@@ -1,0 +1,16 @@
+
+<tr class="phone_number">
+  <% fields_for_task(phone_number, "phone_number") do |d| %>
+  <% if phone_number.new_record? %>
+  <td  align="left" width="39%"><%= d.text_field :number, :class => "big w100" %></td>
+  <td align="center" width="37%"><%= d.select(:contact_type, [["Home", "Home"], ["Work", "Work"], ["Mobile", "Mobile"], ["Fax", "Fax"]], {}, {:class => "big w100"}) %></td>
+  <td align="center"><%= link_to_function image_tag("canel.png"), "$('.cancelButton').live('click',function() {$(this).parents('tr:first').remove();});", :class => "cancelButton" %></td>
+  <% else %>
+  <td  align="left" width="39%"><%= phone_number.number %></td>
+  <td align="center" width="37%"><%= phone_number.contact_type %></td>
+  <td align="center"><%= link_to image_tag("canel.png"), delete_phone_number_user_path(phone_number), :class => "cancelButton"  %></td>
+  <% end %>
+<% end %>
+</tr>
+
+     

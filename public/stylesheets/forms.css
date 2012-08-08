@@ -1,0 +1,316 @@
+@charset "utf-8";
+/*	-------------------------------------------------------------
+	Lovely CSS - A CSS framework by Constantinos Demetriadis
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	URL:			www.ohmylovely.com/css-framework/
+	Description:	Form CSS module
+	Author:			Constantinos Demetriadis
+	                - - - - - - - - - - - - - - - - - - - - - - -
+					Original code by Prabhath Sirisena
+
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	SVN Repository Info
+	
+	$Id: plg.forms.css 289 2010-03-17 15:02:11Z cdemetriadis $
+	$HeadURL: https://cdemetriadis@lovely-css.googlecode.com/svn/trunk/lovely-css/plug-ins/plg.forms.css $
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	Installation
+
+	Add this line in your HTML:
+		@import url("./lovely-css/plug-ins/plg.forms.css");
+
+	Help?
+		class formContainer	= This class should wrap the form - req div
+
+	*/
+	
+		
+	
+/*	Form Container
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	*/
+		.formContainer {
+	margin: 0px;
+	padding: 0px;
+	font-family:"helvetica", "arial", sans-serif;
+}
+/*	Fieldset
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	*/
+		.formContainer form fieldset {
+	margin: 0;
+	padding: 0px 5px;
+}
+/*	Legend
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	*/
+		.formContainer form fieldset legend {
+	padding: 0 0.3em;
+	font-weight: bold;
+	color: #666;
+}
+/*	Field Note
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	*/
+		.formContainer form fieldset p.note {
+	margin-left: 163px;
+	font-size: 0.9em;
+	color: #999;
+}
+/*	Form Items
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	*/
+		.formContainer form fieldset .formItem {
+	clear: both;
+	overflow: visible;
+	padding: 0.9em 0;
+}
+.formContainer label, .formContainer span.label {
+	/*margin-right: 10px;*/
+			font-size:13px;
+	width: 150px;
+	padding: 3px 10px 3px 3px;
+	display: block;
+	float: left;
+	text-align: left;
+	position: relative;
+	font-family:"helvetica", "arial", sans-serif;
+}
+/* Generic element styles */
+		.formContainer input, .formContainer textarea {
+	padding:6px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	font-family:"helvetica", "arial", sans-serif;
+}
+/* Required field icon (asterisk) */
+		.formContainer label em, .formContainer span.label em {
+	position: absolute;
+	right: 1;
+	font-size: 120%;
+	font-style: normal;
+	color: #C00;
+}
+/* Error style */
+		.formContainer .error label, .formContainer .error span {
+	color: #C00;
+}
+.formContainer .error .note {
+	color: #C00;
+}
+.formContainer .error input {
+	border-color: #C00;
+	background-color: #FEF;
+}
+/* Mouse focus style */	
+		.formContainer input:focus, .formContainer.error input:focus, .formContainer textarea:focus {
+	background-color: #f9f9f9;
+	border-color: #ccc;
+}
+/* Input */
+		.formContainer input {
+	border-width: 1px;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+/* Textarea */
+		.formContainer textarea {
+	font-size: 120%;
+	font-style: normal;
+	width: 98%;
+	height: auto;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+/* select menu*/
+.formContainer select {
+ padding:2px font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+.formContainer select.big {
+	width:90%;
+}
+.formContainer select.medium {
+	width:50%;
+}
+.formContainer textarea.small {
+	font-size: 120%;
+	font-style: normal;
+	width: 40%;
+	height: auto;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+/* File */
+		.formContainer input.itemFile {
+	-moz-box-shadow: none;
+	box-shadow:none;
+	border:1px solid #d4d3d2;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+/* Control set - Radio and checkboxes */
+		.formContainer .controlSet {
+	padding: 0.25em 0 0.25em 0;
+	width: 25%;
+	/*width: 200px;*/
+      float: left;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+.formContainer .controlSet label {
+	padding-right: 5px;
+	font-weight: normal;
+	width: auto;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+.formContainer .controlSet input {
+	width: auto;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+.formContainer .controlSet.vertical label {
+	width: 200px;
+	text-align: left;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+/* Button Set */
+		.formContainer .buttonSet {
+	width:110px;
+	float: left;
+	margin-right:30px;
+	margin-bottom:30px;
+	padding-right: 10px;
+	padding-left: 10px;
+	background: #CCCCCC;
+	text-align:center;
+	cursor:pointer;
+	color:#474747;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+	text-shadow:1px 1px 0 #FFFFFF;
+	font-weight:bold;
+}
+.formContainer .buttonSet_pass {
+	float: left;
+	margin-right:30px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-top:5px;
+	background: #CCCCCC;
+	text-align:center;
+	color:#474747;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+	text-shadow:1px 1px 0 #FFFFFF;
+	font-weight:bold;
+}
+.formContainer .buttonSet input {
+	margin: 0 7px 7px 0;
+	cursor: pointer;
+	width: auto;
+	padding: 5px 10px;
+}
+.formContainer input.buttonSubmit {
+	background:none;
+	border:none;
+	cursor:pointer;
+}
+.formContainer input.buttonSubmit:hover {
+}
+.formContainer input.buttonSubmit:active {
+	color: #fff;
+}
+.formContainer input.buttonReset {
+	color: #d12f19;
+}
+.formContainer input.buttonReset:hover {
+	background: #fbe3e4;
+	border-color: #fbc2c4;
+	color: #d12f19;
+}
+.formContainer input.buttonReset:active {
+	background-color: #d12f19;
+	border-color: #d12f19;
+	color: #fff;
+}
+.formContainer input.buttonNeutral {
+	color: #666;
+}
+.formContainer input.buttonNeutral:hover {
+	background-color: #dff4ff;
+	border-color: #c2e1ef;
+	color: #336699;
+}
+.formContainer input.buttonNeutral:active {
+	background-color: #6299c5;
+	border-color: #6299c5;
+	color: #fff;
+}
+/* Form Styling for Top Aligned Labels */
+
+.formContainer form fieldset .formItem1 {
+	clear: both;
+	overflow: visible;
+	padding: 0.3em 0;
+	background:none;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+.formContainer .formItem1 label, .formContainer .formItem1 span.label {
+	/*margin-right: 10px;*/
+			padding: 3px 5px 3px 3px;
+	float:left;
+	text-align: left;
+	position: relative;
+	background:none;
+	width:auto;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+.formContainer form fieldset p.note1 {
+	font-size: 0.9em;
+	color: #999;
+}
+.formContainer .error .note1 {
+	color: #C00;
+}
+/* Custom Forms Element Styling */
+	
+	
+.formContainer input.large {
+	width:98%
+}
+.formContainer input.big {
+	width:70%
+}
+.formContainer input.medium {
+	width:40%
+}
+input.small, .formContainer input.small {
+	width:50px;
+	padding:3px 1px
+}
+button.big, input.big {
+	padding:6px 6px;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+button.med, input.med {
+	padding:2px 10px;
+	font-family:"helvetica", "arial", sans-serif;
+	font-size:12px;
+}
+button.tiny, input.tiny {
+	padding:2px;
+	font-size:11px;
+}
+button.tiny, input.tiny-95 {
+	padding:2px;
+	font-size:11px;
+	width:95%
+}
+input.tiny-30 {
+	padding:2px;
+	font-size:11px;
+	width:30px;
+}

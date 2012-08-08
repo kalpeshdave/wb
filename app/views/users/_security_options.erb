@@ -1,0 +1,36 @@
+<fieldset>
+  <div class="headingBg">
+    <div class="fl">
+      <h2>Security Options</h2>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="formLeft">
+    <div class="formItem w40 pt10 pr25">
+      <label>&nbsp;</label>
+      <%= link_to "Change Password", password_settings_url, :class => "link"  %>
+    </div>
+   
+    <div class="formItem w50 pt15 ">
+      
+    </div>
+    <div class="formItem w40 pt10 pr25 pb10">
+      <label for="checkbox">
+        <%- form.fields_for :user_preference_attributes, @user.user_preference do |uf| -%>
+          <%= uf.hidden_field(:id) %>
+          <%= uf.check_box(:contact_me, 'data-href' => user_access_user_path(@user), :onclick => "return okCancelConfirm('Are you sure you want to Allow/Block All?');") %>
+          <%= uf.label :contact_me, "Allow All to Contact Me" %>
+        <%- end -%>
+      </label>
+    </div>
+     <div class="formItem w40 pr25">
+      <label>&nbsp;</label>
+      <%= link_to "Change Security Question", edit_account_url, :class => "link"  %>
+    </div>
+  </div>
+  
+  <div class="formRight" id="user_access_list">
+    <%= render "user_access" %>
+  </div>
+  <div class="clear"></div>
+</fieldset>

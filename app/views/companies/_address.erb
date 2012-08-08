@@ -1,0 +1,104 @@
+<div class="address">
+  <% fields_for_task(address, "addresses") do |add| %>
+    <% if address.new_record? %>
+      <div class="w100 fl">
+        <div class="w20 pl25 fl">
+          <div class="formItem w100 pt15">
+            <%= check_box_tag "company[addresses_attributes][][is_primary]", true, { :checked => true } %>
+            <%= add.label :is_primary, "Primary Address" %><br />
+
+            <%= check_box_tag "company[addresses_attributes][][is_mailing]", true %>
+            <%= add.label :is_mailing, "Mailing Address" %><br />
+
+            <%= check_box_tag "company[addresses_attributes][][is_billing]", true %>
+            <%= add.label :is_billing, "Billing Address" %>
+          </div>
+        </div>
+        <div class="w50 fl">
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address Description</label>
+            <%= add.text_field :address_description, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address 1</label>
+            <%= add.text_field :address_1, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address 2</label>
+            <%= add.text_field :address_2, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">City</label>
+            <%= add.text_field :city, :class => "big w100" %>
+          </div>
+          <div class="formItem w40 pt15">
+            <label for="companyname">Postal Code</label>
+            <%= add.text_field :zipcode, :class => "big w100" %>
+          </div>
+          <div class="formItem w50 pt15">
+            <label for="companyname">State</label>
+            <%= add.text_field :state, :class => "big w100" %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Country</label>
+            <%= add.localized_country_select(:country, [], {:include_blank => 'Please choose...'},  { :class => "big w100"}) %>
+          </div>
+        </div>
+      </div>
+      <div class="fr pr25"><%= link_to_function image_tag("canel.png"), "$('.cancelButton').live('click',function() {$(this).parents('div.address').remove();});", :class => "cancelButton" %></div>
+    <% else %>
+      <div id="wholebook-show-company-address-<%=address.id%>">
+        <div class="w100 fl">
+          <div class="w20 pl25 fl">
+            <div class="formItem w100 pt15">
+              <label for="checkbox1">
+                <%= address.is_primary? ? "Primary Address" : ""  %>
+              </label><br />
+              <label for="checkbox1">
+                <%= address.is_mailing? ? "Mailing Address" : ""  %>
+              </label><br />
+              <label for="checkbox1">
+                <%= address.is_billing? ? "Billing Address" : ""  %>
+              </label>
+            </div>
+          </div>
+          <div class="w50 fl">
+            <div class="formItem w90 pt15">
+              <label for="companyname">Address Description</label>
+              <%= address.address_description %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">Address 1</label>
+              <%= address.address_1 %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">Address 2</label>
+              <%= address.address_2 %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">City</label>
+              <%= address.city %>
+            </div>
+            <div class="formItem w40 pt15">
+              <label for="companyname">Postal Code</label>
+              <%= address.zipcode %>
+            </div>
+            <div class="formItem w50 pt15">
+              <label for="companyname">State</label>
+              <%= address.state %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">Country</label>
+              <%= address.country %>
+            </div>
+          </div>
+        </div>
+
+        <div class="fr pr25">
+          <%= link_to image_tag("edit.png"), edit_address_path(@company.id, address), "data-address-id" => address.id, :class => "wholebooks-edit-company-address"  %>
+          <%= link_to image_tag("canel.png"), delete_address_company_path(address, :company_id => @company.id), :class => "cancelButton"  %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

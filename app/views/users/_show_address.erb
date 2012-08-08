@@ -1,0 +1,49 @@
+ <div class="w100 fl">
+          <div class="w20 pl25 fl">
+            <div class="formItem w100 pt15">
+              <label for="checkbox1">
+                <%= @address.is_primary? ? "Primary Address" : ""  %>
+              </label><br />
+              <label for="checkbox1">
+                <%= @address.is_mailing? ? "Mailing Address" : ""  %>
+              </label><br />
+              <label for="checkbox1">
+                <%= @address.is_billing? ? "Billing Address" : ""  %>
+              </label>
+            </div>
+          </div>
+          <div class="w50 fl">
+            <div class="formItem w90 pt15">
+              <label for="companyname">Address Description</label>
+              <%= @address.address_description %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">Address 1</label>
+              <%= @address.address_1 %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">Address 2</label>
+              <%= @address.address_2 %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">City</label>
+              <%= @address.city %>
+            </div>
+            <div class="formItem w40 pt15">
+              <label for="companyname">Postal Code</label>
+              <%= @address.zipcode %>
+            </div>
+            <div class="formItem w50 pt15">
+              <label for="companyname">State</label>
+              <%= @address.state %>
+            </div>
+            <div class="formItem w90 pt15">
+              <label for="companyname">Country</label>
+              <%= @address.country %>
+            </div>
+          </div>
+        </div>
+<div class="fr pr25">
+          <%= link_to image_tag("edit.png"), edit_address_user_path(current_user, :address_id => @address.id), "data-address-id" => @address.id, :class => "wholebooks-edit-company-address"  %>
+          <%= link_to image_tag("canel.png"), delete_address_user_path(current_user, :address_id => @address.id), :class => "cancelButton"  %>
+        </div>

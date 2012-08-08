@@ -1,0 +1,70 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <a href="index.html">Home </a> / <a href="contract_contracts.html">Timesheets</a> / Aprrove or Reject</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <%- form_for @timesheet, :url => approve_reject_timesheet_url(@timesheet), :html => { :multipart => true, :method => :put } do |f| -%>
+          <div class="pagedivider">
+          <fieldset>
+          <div class="headingBg">
+            <div class="fl w30">
+              <% if params[:type] == "Reject" %>
+              <h2>Reject Contract</h2>
+              <% else %>
+              <h2>Approve Contract</h2>
+              <% end %>
+            </div>
+            <div class="clear"></div>
+          </div>
+           <div class="w100 fl">
+
+                <div class="w15 mgt5 mgr5 pt10 pl10 pb5 pr10 new fl">Standard</div>
+                </div>
+  <div class="w75 fl">
+          <div class="w100 pt15">
+
+              <div class="form w100">
+
+                <label for="recipient">Contract Number</label>
+                <%= f.text_field :timesheet_number, :class => "big w100" %>
+              </div>
+              <div class="w100 pt15">
+                <label for="description">Description</label>
+                <%= f.text_field :description, :class => "big w100" %>
+              </div>
+              <div class="w100 pt15">
+                 <% if params[:type] == "Reject" %>
+                <label for="description">Reject Reason</label>
+                <% else %>
+                <label for="description">Comment</label>
+                <% end %>
+                
+                <%= text_area_tag "reason", nil, :class => "big w100" %>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          </fieldset>
+             <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+        <div class="buttonCancel">
+          <%= link_to "Cancel", timesheet_dashboard_url, :class => "buttonSubmit"  %>
+         
+        </div>
+               <% if params[:type] == "Reject" %>
+                   <div class="buttonWrapper">
+                     <%= f.submit "Reject", :class => "button"  %>
+                   </div>
+                 <% else %>
+                   <div class="buttonWrapper">
+                     <%= f.submit "Approve", :class => "button"  %>
+                   </div>
+                 <% end %>
+               <% end %>
+        </div>
+            
+      </div>
+     
+    </div>
+    </div>

@@ -1,0 +1,23 @@
+<%- if !@user.nil? &&  !@user.new_record? -%>
+<tr class="user_access_list">
+  <% fields_for_task(user_access_list, "user_access_list") do |ua| %>
+    <% if user_access_list.new_record? %>
+    <% if current_user %>
+     <%- user = user_index -%>
+    <% else %>
+        <%- user = User.all -%>
+    <% end %>
+      <td align="left" width="39%"><%= ua.select :access_user_id, user.map {|u| [u.name, u.id]}, {}, { :class => "big w100" } %></td>
+      <td align="center" width="37%"><%= status %><%= ua.hidden_field :status, :value => status %> </td>
+      <td align="center"><%= link_to_function image_tag("canel.png"), "$('.cancelButton').live('click',function() {$(this).parents('tr:first').remove();});", :class => "cancelButton" %></td>
+    <% else %>
+      <td align="left" width="39%">
+        <% user = User.find(user_access_list.access_user_id) %>
+        <%=h user.name %>
+      </td>
+      <td align="center" width="37%"><%=h user_access_list.status %></td>
+      <td align="center"><%= link_to image_tag("canel.png"), delete_allow_block_user_path(user_access_list), :class => "cancelButton"  %></td>
+    <% end %>
+  <% end %>
+</tr>
+<%- end -%>

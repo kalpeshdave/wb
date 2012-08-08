@@ -1,0 +1,73 @@
+
+<div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to "Home", root_url %> / <%= link_to "Contracts", contract_dashboard_url %> / Create</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <%- form_for @contract, :url => contract_sub_contracts_path(@contract), :html => { :multipart => true, :method => :post } do |f| -%>
+        
+          <%= render "form", :f => f, :contract_type => t("contracts.create_sub_contract") %>
+        <div class="pagedivider ">
+          <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Attachments</h2>
+            </div>
+
+            <div class="clear"></div>
+          </div>
+          <table width="100%" border="1" cellpadding="0" cellspacing="0">
+            <tr class="head">
+              <td width="27%" align="left"><strong>File Name</strong></td>
+              <td width="15%" align="center"><strong>File Size</strong></td>
+              <td width="36%" align="center"><strong>Level</strong></td>
+              <td width="5%"><div class="fr"><div id="add_attachment"> <span class="addAttachIn"><a href="#">Add</a></span></div></div></td>
+            </tr>
+           <tbody id="attachments">
+                <%= render :partial => 'attachment', :collection => @contract.attachments %>
+              </tbody>
+          </table>
+          </fieldset>
+        </div>
+        <div class="pagedivider pb15">
+          <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Contract History</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table width="100%" border="1" cellpadding="0" cellspacing="0">
+            <tbody><tr class="head">
+              <td width="27%" align="left"><strong>Date</strong></td>
+              <td width="15%" align="center"><strong>Action</strong></td>
+              <td width="17%" align="center"><strong>User</strong></td>
+            </tr>
+
+          </tbody></table>
+          </fieldset>
+        </div>
+
+      <!--/form-->
+      
+      
+        <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+         <div class="buttonCancel">
+            <%= link_to "Cancel", contract_dashboard_path, :class => "buttonSubmit" %>
+           <!-- <input class="buttonSubmit" value="Cancel" tabindex="" type="submit" />-->
+        </div>
+          <div class="buttonWrapper post">
+              <%= f.submit "Create&nbsp;Post", { :class => "button" } %>
+          </div>
+          <div class="buttonWrapper propose">
+              <%= f.submit "Create&nbsp;&amp;&nbsp;Propose", { :class => "button" } %>
+          </div>
+          <div class="buttonWrapper">
+              <%= f.submit "Create", :class => "button"  %>
+          </div>
+        </div>
+      
+        <%- end -%>
+    </div>
+  </div>

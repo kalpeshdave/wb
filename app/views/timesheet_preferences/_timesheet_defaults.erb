@@ -1,0 +1,87 @@
+<%- u.fields_for :timesheet_default_attributes, current_user.timesheet_default do |f| -%>
+  <%= f.hidden_field :id  %>
+
+ 
+    <div class="headingBg">
+      <div class="fl">
+        <h2>Timesheet Defaults</h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="formItem w25 pt15 pr15">
+      <%= f.label :time_base_id, t("contracts.timesheet_default.timesheets_entered_each") %>
+      <%= f.select(:time_base_id, TimeBase.all.map { |t| [t.name, t.id] }, { :include_blank => "Select" }, { 'data-href' => get_time_units_user_timesheet_preference_url(current_user), :class => "big w100" }) %>
+    </div>
+    <div class="formItem w25 pt15 pr15">
+      <label for="timeunit">Units Entered</label>
+      <% time_unit_value = current_user.timesheet_default.time_base.nil? ? (current_user.timesheet_default.time_unit.nil? ? [["Please Select", ""]] : [[current_user.timesheet_default.time_unit.name, current_user.timesheet_default.time_unit.id]]) : time_units(current_user.timesheet_default.time_base.id) %>
+      <div id="time_units">
+        <%= f.select(:time_unit_id, time_unit_value, { :prompt => "Please Select", :selected => current_user.timesheet_default.time_unit }, { :class => "big w100" }) %>
+        </div>
+    </div>
+    <div class="formItem w25 pt15 pr15">
+        <%= f.label :default_value, "Default Value" %>
+        <%= f.text_field :default_value, { :class => "big w100" } %>
+    </div>
+    <div class="clear"></div>
+    <div class="w100">
+      <% prefix_value = current_user.timesheet_default.options.eql?("autonumber") ? 'block' : 'none' %>
+      <div class="formItem w25 pt15 pr15 prefix" style="display: <%= prefix_value %>;">
+        <%= f.label :timesheet_prefix, "Timesheet Prefix" %><br />
+        <%= f.text_field :timesheet_prefix, {:maxlength => "14", :class => "big w50" } %>
+      </div>
+      <div class="clear"></div>
+      <div class="formItem w25 pt15 pr15 auto-number-setting" >
+        <%#= f.check_box :auto_number, { :class => "small" } %>
+        <%= f.label :options, "Auto-Number Setting" %><br />
+        <%= f.select :options, [["Auto-Number", "autonumber"], ["Begin Date", "begindate"], ["End Date", "enddate"], ["Begin + End Date", "begin+end"], ["Begin Date + Number1", "begin+num1"], ["End Date + Number2", "end+num2"]], {:include_blank => "Please Select"}, { :class => 'big w50'} %>
+      </div>
+      <div class="clear"></div>
+      <div class="formItem w25 pt15 pr15 number" style="display: <%= current_user.timesheet_default.options.nil? ? 'none' : 'block' %>">
+        <% read_value = current_user.timesheet_default.options.eql?("autonumber" || "begin+num1" || "end+num2") ? false : true %>
+        <%= f.label :last_timesheet_number, "Last Timesheet Number" %><br />
+        <%= f.text_field :last_timesheet_number, {:maxlength => "14", :readonly => read_value, :class => 'big w50' } %>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="w100" style="margin-left:240px;">
+      <% num1_value = case current_user.timesheet_default.options
+        when "begin+end"
+          'block'
+        when "begindate"
+          'block'
+        when "begin+num1"
+          'block'
+        else
+          'none'
+        end
+      %>
+      <div class="formItem w25 pt15 num1" style="display: <%= num1_value %>;">
+        <%= f.label :number_date_format1, "Number Date Format 1" %><br />
+        <%= f.select :number_date_format1, [["YYYYMM", "YYYYMM"], ["MMYYYY", "MMYYYY"], ["YYYYMMDD", "YYYYMMDD"], ["DDMMYYYY", "DDMMYYYY"], ["YYYY", "YYYY"]], {:prompt => "Please Select.."}, {:class => 'big w50'} %>
+      </div>
+      
+      <div class="formItem w15 pt30 concat" style="display: <%= current_user.timesheet_default.options.eql?("begin+end") ? 'block' : 'none' %>;">
+        <label for="timeunit">Concatenated</label>
+      </div>
+      <% num2_value = case current_user.timesheet_default.options
+        when "begin+end"
+          'block'
+        when "enddate"
+          'block'
+        when "end+num2"
+          'block'
+        else
+          'none'
+        end
+      %>
+      <div class="formItem w25 pt15 num2" style="display: <%= num2_value %>;">
+        <%= f.label :number_date_format2, "Number Date Format 2" %><br />
+        <%= f.select :number_date_format2, [["YYYYMM", "YYYYMM"], ["MMYYYY", "MMYYYY"], ["YYYYMMDD", "YYYYMMDD"], ["DDMMYYYY", "DDMMYYYY"], ["YYYY", "YYYY"]], {:prompt => "Please Select.."}, {:class => 'big w50'} %>
+      </div>
+    </div>
+
+
+
+<%- end -%>

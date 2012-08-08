@@ -1,0 +1,59 @@
+
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"> <%= link_to "Home", root_url %>  / <%= link_to "Contracts", contract_dashboard_url %> / Create</div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <%= render "show_contract_header" %>
+    <div class="pagedivider ">
+      <fieldset>
+        <div class="headingBg">
+          <div class="fl">
+            <h2>Attachments</h2>
+          </div>
+
+          <div class="clear"></div>
+        </div>
+        <table width="100%" border="1" cellpadding="0" cellspacing="0">
+          <tr class="head">
+            <td width="27%" align="left"><strong>File Name</strong></td>
+            <td width="15%" align="center"><strong>File Size</strong></td>
+            <td width="36%" align="center"><strong>Date</strong></td>
+            <td width="5%"></td>
+          </tr>
+          <tbody id="attachments">
+            <%= render :partial => 'attachment', :collection => @contract.attachments %>
+          </tbody>
+        </table>
+      </fieldset>
+    </div>
+    <div class="pagedivider pb15">
+      <%= render "contract_histories", :contract_histories => @contract.contract_histories %>
+    </div>
+
+    <!--/form-->
+    <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+        <div class="buttonCancel">
+          <%= link_to "Cancel", contract_dashboard_path, :class => "buttonSubmit" %>
+        </div>
+    <%- if @contract.status.eql?('proposed') && !@contract.originator?(current_user) -%>
+      
+        <div class="buttonWrapper">
+          <%= link_to "Reject", recepient_reason_contract_url(@contract, :type => "Reject"), :class => "button"  %>
+        </div>
+        <div class="buttonWrapper">
+          <%= link_to "Approve", recepient_reason_contract_url(@contract), :class => "button"  %>
+        </div>
+      
+    <%- end -%>
+
+    <%- if @contract.status.eql?('approved') && current_user.id.eql?(@contract.recepient_id) && @contract.already_sub_contract_created?(current_user.id) -%>
+      <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+        <div class="buttonWrapper">
+          <%= link_to "Create Subcontract", new_contract_sub_contract_path(@contract), :class => "button"  %>
+        </div>
+      </div>
+    <%- end -%>
+  </div>
+</div>

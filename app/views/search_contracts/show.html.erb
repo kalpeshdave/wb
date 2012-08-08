@@ -1,0 +1,58 @@
+ <!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <a href="index.html">Home </a> /<a href="search_main.html"> Search / Contracts</a></div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <% form_tag sent_mail_search_contracts_url do %>
+          <div class="pagedivider ">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl  pt10">
+                <h2>Search Contracts</h2>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <table width="100%" border="1" cellspacing="0" cellpadding="0">
+              <tr class="head">
+                <td colspan="7" align="center">Contracts Posted</td>
+                <td colspan="2" align="center"><%= link_to "Search Criteria", new_search_contract_url %></td>
+              </tr>
+              <tr class="head">
+                <td width="6%" align="left">&nbsp;</td>
+                <td width="36%" align="left"><strong>Agent</strong></td>
+                <td width="23%" align="left"><strong>Client</strong></td>
+                <td width="35%" align="left"><strong>Date Posted</strong></td>
+                <td width="35%" align="left"><strong>Date Needed</strong></td>
+                <td width="35%" align="left"><strong>City</strong></td>
+                <td width="35%" align="left"><strong>State</strong></td>
+                <td width="35%" align="left"><strong>Country</strong></td>
+                <td width="35%" align="left"><strong>Rate</strong></td>
+              </tr>
+              <tbody>
+                <% unless @search_contract.contracts.blank? %>
+                 <%= render :partial => @search_contract.contracts %>
+                <% else %>
+                <tr>
+                  No Contracts Found!
+                </tr>
+                <% end %>
+              </tbody>            
+            </table>
+            </fieldset>
+          </div>
+        
+        <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+          <div class="buttonCancel">
+            <%= link_to "Cancel", search_contracts_url, :class => "buttonSubmit"  %>
+          </div>
+          
+          <div class="buttonWrapper">
+            <%#= link_to "Contract Agent/Client", "", :class => "button1" %>
+            <%= submit_tag 'Contract Agent/Client', :class => "button1" %>
+          </div>
+        </div>
+        <%- end -%>
+      </div>
+    </div>

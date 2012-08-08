@@ -1,0 +1,131 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to "Home", root_url %> / My Profile </div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <% form_for @user, :url => account_url, :html => {:multipart => true} do |f| %>
+            <%= error_messages_for :user  %>
+          <div class="pagedivider mgt20">
+            <div>Login Email : <%=h @user.email %></div>
+            
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl">
+                <h2>General Information</h2>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="formItem mgr20 w15 pt15">
+              <label>Selected Company</label>
+              <% if @user.company_users.blank?  %>
+                <%= link_to "Select Company", companies_url, :class => "link" %>
+              <% else %>
+                <% @company = CompanyUser.find(:first, :conditions => ['user_id = ?', @user.id], :order => 'created_at DESC') %>
+                <% if @user.is_creator?(@company.company) %>
+                <%= link_to @company.company.name, edit_company_url(@company.company), :class => "link" %>
+                <% else %>
+                <%= link_to @company.company.name, change_company_url(@company.company), :class => "link" %>
+               <% end %>
+              <% end %>
+               </div>
+            <div class="formItem pt15 pr25">
+              <label for="paymentterms">Payment Terms</label>
+              <%= f.select(:payment_term_id, PaymentTerm::NAMES, {:prompt => "#{@user.payment_term.nil? ? "" : @user.payment_term.name}"}, {:class => "big w100"}) %>
+            </div>
+          <!--  <div class="formItem w20 pt15 pr25 pb15">
+              <label>&nbsp;</label>
+              <a href="profile_notificationprofile.html" class="link">Notification Profile</a> </div>-->
+            <div class="formItem w20 pt15 pr15">
+              <label for="contractinformation">&nbsp;</label>
+              <%= link_to "Contact Information", contact_info_path, :class => "link" %>
+             </div>
+            <div class="clear"></div>
+            </fieldset>
+          </div>
+          <div class="pagedivider pb15">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl">
+                <h2>Display Options</h2>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="formItem w20 pt15 pr25">
+              <label for="diplaylanguage">Display Language</label>
+              <%= f.select(:language_id, Language::NAMES, {:prompt => "#{@user.language.name}"}, {:class => "big w100"} ) %>
+            </div>
+            <div class="formItem w20 pt15 pr25">
+              <label for="decimal">Decimal Separator</label>
+              <%= f.select(:decimal, [[".(Dot)", ".(Dot)"], [",(Comma)", ",(Comma)"]], {}, {:class => "big w100"}) %>
+            </div>
+            <div class="formItemNormal">
+              <label for="dateformat">Date Format</label>
+              <%= f.select(:date_format, [["DD/MM/YYYY", "DD/MM/YYYY"], ["MM/DD/YYYY", "MM/DD/YYYY"]], {}, {:class => "big w100"}) %>
+            </div>
+            <div class="clear"></div>
+            </fieldset>
+          </div>
+          <div class="pagedivider security">
+            <%= render "security_options", :form => f %>
+          </div>
+          <div class="pagedivider">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl">
+                <h2>Skills</h2>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="w70 fl">
+            <table width="100%" border="1" cellspacing="0" cellpadding="0">
+              <tr class="head">
+                <td width="42%" align="left"><strong>Skill List</strong></td>
+                <td width="51%" align="center"><strong>Level</strong></td>
+                <td width="7%"> <div class="fr"><div id="add_skill"> <span class="addAttachIn"><a href="#">Add</a></span></div> </div></td>
+              </tr>
+              
+                <tbody id="skills">
+                <%= render :partial => 'skill', :collection => @user.skills %>
+              </tbody>
+            </table>
+            
+            </div>
+            </fieldset>
+          </div>
+          <div class="pagedivider">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl">
+                <h2>C.V Attachments</h2>
+              </div>
+                
+              <div class="clear"></div>
+            </div>
+            <table width="100%" border="1" cellspacing="0" cellpadding="0">
+              <tr class="head">
+                <td width="27%" align="left"><strong>File Name</strong></td>
+                <td width="15%" align="center"><strong>File Size</strong></td>
+                <!--<td width="17%" align="center">&nbsp;</td>-->
+                <td width="36%" align="center"><strong>Date</strong></td>
+                <td width="10%"><div class="fr"><div id="add_attachment"> <span class="addAttachIn"><a href="#">Add</a></span></div></div> </td>
+              </tr>
+              <tbody id="attachments">
+                <%= render :partial => 'attachment', :collection => @user.attachments %>
+              </tbody>
+            </table>
+            <div class="buttonMainWrapper">
+              <div class="buttonCancel">
+                <%= link_to "Cancel", account_url  %> <!--<input type="submit" class="buttonSubmit" value="Cancel" tabindex="" />-->
+              </div>
+              <div class="buttonWrapper">
+                <%= f.submit "Save", :class => "button" %>
+              </div>
+              
+            </div>
+            </fieldset>
+          </div>
+        <% end %>
+      </div>
+    </div>

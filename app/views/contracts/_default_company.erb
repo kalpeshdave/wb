@@ -1,0 +1,22 @@
+<div class="formItem w20">
+  <label>Client Company</label>
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <div id="client_company">
+      <div id="wholebooks-single-company">
+        <%= h @company.company.name %>
+        <%= hidden_field_tag "contract[client_company_id]", :value => @company.company.id %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="formItem w20 pr25">
+  <label>Client Contact</label>
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <div id="client_contact">
+      <%= h current_user.name %>
+      <%= hidden_field_tag 'contract[client_id]', :value => current_user.id  %>
+    </div><!--<a href="http://wholebooks.rails-team.com/apps/contract_contracts_search.html" class="normal-link">Xavier&nbsp;Martin</a>-->
+  </div>
+</div>

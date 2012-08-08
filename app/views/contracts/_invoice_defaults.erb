@@ -1,0 +1,46 @@
+<%- c.fields_for :invoice_default_attributes, @contract.invoice_default do |f| -%>
+  <fieldset>
+    <div class="headingBg">
+      <div class="fl">
+        <h2><%= t("contracts.invoice_default.invoice_defaults") %></h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <%- if @contract.new_record? -%>
+      <% invoice_default = current_user.invoice_default %>
+      <div class="formItem w20 pt25 pr25">
+        <%= f.label :payment_term_id, t("payments.payment_terms") %>
+        <%= f.select(:payment_term_id, PaymentTerm::NAMES, { :include_blank => "Select", :selected => invoice_default.payment_term_id }, {:class => "big w100"}) %>
+      </div>
+      <div class="formItem w20 pt25 pr25">
+        <%= f.label :rate %>
+        <%= f.text_field :rate, { :value => invoice_default.rate, :class => "big w100" } %>
+      </div>
+      <div class="formItem w20 pt25 pr25">
+        <%= f.label :unit_quantity %>
+        <%= f.text_field :unit_quantity, { :value => invoice_default.unit_quantity, :class => "big w100" } %>
+      </div>
+      <div class="formItem w20 pt25">
+        <%= f.label :currency_id, t("currency") %>
+        <%= f.select(:currency_id, Currency.all.map { |i| [i.iso_name, i.id] }, { :include_blank => "Select", :selected => invoice_default.currency_id }, {:class => "big w100"}) %>
+      </div>
+    <%- else -%>
+      <div class="formItem w20 pt25 pr25">
+        <%= f.label :payment_term, t("payments.payment_terms") %>
+        <%= f.select(:payment_term_id, PaymentTerm::NAMES, { :include_blank => "Select" }, {:class => "big w100"}) %>
+      </div>
+      <div class="formItem w20 pt25 pr25">
+        <%= f.label :rate %>
+        <%= f.text_field :rate, { :class => "big w100" } %>
+      </div>
+      <div class="formItem w20 pt25 pr25">
+        <%= f.label :unit_quantity %>
+        <%= f.text_field :unit_quantity, { :class => "big w100" } %>
+      </div>
+      <div class="formItem w20 pt25">
+        <%= f.label :currency_id, t("currency") %>
+        <%= f.select(:currency_id, Currency.all.map { |i| [i.iso_name, i.id] }, { :include_blank => "Select" }, {:class => "big w100"}) %>
+      </div>
+    <%- end -%>
+  </fieldset>
+<%- end -%>

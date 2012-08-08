@@ -1,0 +1,52 @@
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"> <%= link_to "Home", root_url %>  / <%= link_to "Contracts", contract_dashboard_url %> / View/Edit</div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <form action="#" method="get" enctype="multipart/form-data">
+      <div class="pagedivider">
+        <fieldset>
+          <div class="headingBg">
+            <div class="fl w30">
+              <h2><%= "#{t('view')}/#{t('edit')} #{t('contracts.name')}" %> </h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table width="137%" border="1" cellpadding="0" cellspacing="0">
+
+            <tbody><tr class="head">
+                <td align="left"><strong><%= t("contracts.contract_number") %></strong></td>
+                <td align="center"><strong><%= t("description") %></strong></td>
+                <td align="center"><strong><%= t("status") %></strong></td>
+              </tr>
+              <%- @contracts.each do |contract| -%>
+              <% link = contract.creator.eql?(current_user) ? edit_contract_path(contract) : contract_path(contract) %>
+                <tr>
+                  <td width="24%" align="left">
+                    <%= link_to contract.contract_number, link %>
+                  </td>
+                  <td width="25%" align="center">
+                    <%= link_to contract.description, link %>
+                  </td>
+                  <td width="25%" align="center">
+                    <%= link_to contract.status, link %>
+                  </td>
+                </tr>
+              <%- end -%>
+            </tbody>
+            <tfoot class="paginate">
+              <%= will_paginate @contracts %>
+            </tfoot>
+          </table>
+          <div class="clear"></div>
+        </fieldset>
+
+      </div>
+      <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+        <div class="buttonCancel">
+          <%= link_to "Cancel", contract_dashboard_url  %>
+        </div>
+      </div>
+    </form></div>
+</div>

@@ -1,0 +1,58 @@
+<%- u.fields_for :contract_default_attributes, current_user.contract_default do |f| -%>
+  <%= f.hidden_field :id  %>
+  <fieldset>
+    <div class="headingBg">
+      <div class="fl">
+        <h2><%= t("contracts.contract_default.contract_defaults") %></h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="w100 fl">
+      <div class="formItem w20 pt25">
+        <label for="paymentterms"><%= t("contracts.contract_type") %></label>
+        <div class="w70 mgt5 mgr5 pt5 pl10 pb5 pr10 new ">
+          Standard
+        </div>
+      </div>
+
+      <div class="formItem w25 fl pt30">
+        <%= f.check_box :allow_timesheet, { :class => "small timesheet_expenses", "data-name" => "timesheet_signature" } %>
+        <%= f.label :allow_timesheet, t("contracts.contract_default.allow_timeSheets") %>
+      </div>
+
+      <div class="formItem w40 fl pt30">
+        <%= f.check_box :allow_expenses, { :class => "small timesheet_expenses", "data-name" => "expense_approval" } %>
+        <%= f.label :allow_expenses, t("contracts.contract_default.allow_expenses") %>
+      </div>
+
+      <% css = current_user.contract_default.allow_timesheet ? "block" : "none"  %>
+      <div class="formItem w25 fl pt30 timesheet_signature" style="display: <%= css %>;">
+        <%= f.check_box :require_timesheet_signature, { :class => "small", :readonly => current_user.contract_default.allow_timesheet ? false : true } %>
+        <%= f.label :require_timesheet_signature, t("contracts.contract_default.require_timesheet_signature") %>
+      </div>
+
+      <% css = current_user.contract_default.allow_expenses ? "block" : "none"  %>
+      <div class="formItem w30 fl pt30 expense_approval" style="display: <%= css %>;">
+        <%= f.check_box :require_expense_approval, { :class => "small", :readonly => current_user.contract_default.allow_expenses ? false : true } %>
+        <%= f.label :require_expense_approval, t("contracts.contract_default.require_expense_approval") %>
+      </div>
+    </div>
+
+    <div class="w100 fl">
+      <div class="formItem w20 pt25">
+        <%= f.label :contract_prefix, "Contract Prefix" %>
+        <%= f.text_field :contract_prefix, {:maxlength => "13",  :class => "big w80" } %>
+      </div>
+      <div class="formItem w25 fl pt30">
+        <%= f.check_box :auto_number, { :class => "small" } %>
+        <%= f.label :auto_number, t("contracts.contract_default.auto_number_contracts") %>
+      </div>
+
+      <div class="formItem w20 pt25">
+        <%= f.label :last_contract_number, "Last Contract Number" %>
+        <%= f.text_field :last_contract_number, {:maxlength => "13", :disabled => current_user.contract_default.auto_number? ? false : true, :class => 'big w80'} %>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </fieldset>
+<%- end -%>

@@ -1,0 +1,89 @@
+<!--CONTENT STARTS-->
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"><%= link_to "Home", root_url %>  / <%= link_to "My Profile", account_url %>/ <%= t(:contact_information) %> </div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <% form_for @user, :url => update_contact_info_url do |f| %>
+      <%= f.error_messages %>
+      <div class="pagedivider">
+        <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2><%= t(:contact_information) %></h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="w20 mgt10">
+            <% if @user.company_users.blank? %>
+              <%= link_to "Add Company", companies_url, :class => "link" %>
+            <% else %>
+              <% @company = CompanyUser.find(:first, :conditions => ['user_id = ?', @user.id], :order => 'created_at DESC') %>
+              <% if @user.is_creator?(@company.company) %>
+                <%= link_to @company.company.name, edit_company_url(@company.company), :class => "link" %>
+              <% else %>
+                <%= link_to @company.company.name, change_company_url(@company.company), :class => "link" %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="clear"></div>
+          <div class="formItem w20 pr10 pt15">
+            <%= f.label :first_name, "First Name" %>
+            <%= f.text_field :first_name, :class => "big w90" %>
+          </div>
+          <div class="formItem w20 pr10 pt15">
+            <%= f.label :middle_name, "Middle Name" %>
+            <%= f.text_field :middle_name, :class => "big w90" %>
+          </div>
+          <div class="formItem w20 pr10 pt15">
+            <%= f.label :last_name, "Last Name" %>
+            <%= f.text_field :last_name, :class => "big w90" %>
+          </div>
+          <div class="clear"></div>
+        </fieldset>
+      </div>
+      <div class="pagedivider ">
+        <fieldset>
+          <div class="w60">
+            <table width="100%" border="1" cellpadding="0" cellspacing="0">
+              <tr class="head">
+                <td colspan="2" align="left"><strong><%= t(:phone_number) %></strong><strong></strong></td>
+                <td width="24%"><div class="addAttachIn"><div id="add_number"><a href="#">Add</a></div></div></td>
+              </tr>
+              <tbody id="phone_numbers">
+                <%= render :partial => 'phone_number', :collection => @user.phone_numbers %>
+              </tbody>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="pagedivider5 pb25">
+        <div class="headingBg">
+          <div class="fl">
+            <h2>Addressess</h2>
+          </div>
+          <div class="fr"><div id="add_user_address"> <span class="addAttachIn"><a href="#">Add</a></span></div></div>
+          <div class="clear"></div>
+        </div>
+        <div class="pagedivider5 pb25">
+          <fieldset>
+            <div id="addresses">
+              <%= render :partial => 'address', :collection => @user.addresses.order_by_primary %>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttonMainWrapper pr25">
+      <div class="buttonCancel">
+        <%= link_to "Cancel", account_url %>
+      </div>
+      <div class="buttonWrapper">
+        <%= f.submit "Save", :class => "button" %>
+      </div>
+    </div>
+  <%- end -%>
+</div>

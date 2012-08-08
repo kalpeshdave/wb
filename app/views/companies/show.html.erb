@@ -1,0 +1,108 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to "Home", root_url %> / <%= link_to "My Profile", account_url %> / Company Profile</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <% form_for @company, :url => use_company_url(@company) do |f| %>
+         <%= f.error_messages %>
+        <div class="pagedivider">
+          <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Company Profile</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          <div class="formItem w20 pr25 pt15 pb15">
+            <label for="firstname">Company Name</label><br/>
+            <%=h @company.name %>
+          </div>
+          <div class="formItem w20 pr25 pt15 pb15">
+            <label for="companyname">Website</label><br />
+            <%=h @company.url %>
+          </div>
+          <div class="clear"></div>
+          </fieldset>
+        </div>
+        <div class="pagedivider">
+
+        <fieldset>
+        <div class="headingBg">
+          <div class="fl">
+            <h2>Addressess</h2>
+          </div>
+          <div class="fr">
+            <div class="addAttachIn pr15 pt5"><strong>Add</strong></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="pagedivider5 pb25">
+          <% @company.addresses.each  do |address| %>
+          <fieldset>
+          <div class="w100 fl">
+        <div class="w20 pl25 fl">
+          <div class="formItem w100 pt15">
+            <label for="checkbox1">
+              <%= address.is_primary? ? "Primary Address" : ""  %>
+              </label><br />
+            <label for="checkbox1">
+              <%= address.is_mailing? ? "Mailing Address" : ""  %>
+              </label><br />
+            <label for="checkbox1">
+              <%= address.is_billing? ? "Billing Address" : ""  %>
+              </label>
+          </div>
+        </div>
+        <div class="w50 fl">
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address Description</label>
+            <%= address.address_description %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address 1</label>
+            <%= address.address_1 %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Address 2</label>
+            <%= address.address_2 %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">City</label>
+            <%= address.city %>
+          </div>
+          <div class="formItem w40 pt15">
+            <label for="companyname">Postal Code</label>
+            <%= address.zipcode %>
+          </div>
+          <div class="formItem w50 pt15">
+            <label for="companyname">State</label>
+            <%= address.state %>
+          </div>
+          <div class="formItem w90 pt15">
+            <label for="companyname">Country</label>
+            <%= address.country %>
+          </div>
+        </div>
+      </div>
+          
+           </fieldset>
+          <% end %>
+        </div>
+        <div class="buttonMainWrapper pt25">
+        <div class="buttonCancel">
+          <%= link_to "Back", companies_url  %>
+        </div>
+      <div class="buttonWrapper">
+          <%= f.submit "Use", :class => "button"  %>
+      </div>
+          
+    </div>
+    </fieldset>
+
+  </div>
+<% end %>
+</div>
+</div>

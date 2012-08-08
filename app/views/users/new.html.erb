@@ -1,0 +1,40 @@
+<!--CONTENT STARTS-->
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs">
+    <%= link_to t("home"), root_url %> / sign_up 
+  </div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <% form_for @user, :url => account_path do |f| %>
+      <%= f.error_messages %>
+      <div class="pagedivider">
+        <fieldset>
+          <div class="headingBg">
+            <div class="fl w30">
+              <h2><%= t("signup.signup_header") %></h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <%= render "form", :object => f %>
+          <div class="formItem w100 pt10 pl20">
+            <%= t("signup.security_code") %>
+            <%= get_captcha(:options => {:theme => 'white', :tabindex => 10}) %>
+          </div>
+        </fieldset>
+
+      </div>
+
+      <div class="fl">
+        <div class="buttonWrapper">
+          <%= f.submit t("signup.singup_button"), :class => "button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,2 @@
+module SubContractsHelper
+end

@@ -1,0 +1,18 @@
+<tr class="skill">
+  <% fields_for_task(skill, "skill") do |s| %>
+    <% if skill.new_record? %>
+      <td  align="left" width="39%"><%= s.select(:name, [["Windows NT", "Windows NT"], ["Unix", "Unix"], ["Linux", "Linux"], ["Mac", "Mac"], ["Java", "Java"], ["C++", "C++"], ["SQL", "SQL"], ["Oracle", "Oracle"], ["MySQL", "MySQL"], ["Perl", "Perl"], ["Python", "Python"], ["Construction", "Construction"], ["Furniture Design", "Furniture Design"]], {}, {:class => "big w100"}) %></td>
+      <td align="center" width="37%"><%= s.select(:level_type, [["Very Low", "Very Low"], ["Low", "Low"], ["Average", "Average"], ["High", "High"], ["Expert", "Expert"]], {}, {:class => "big w100"}) %></td>
+      <td align="center">
+        <%= link_to_function image_tag("canel.png"), "$('.cancelButton').live('click',function(){$(this).parents('tr:first').remove();});", :class => "cancelButton" %>
+      </td>
+    <% else %>
+      <td  align="left" width="39%"><%= skill.name %></td>
+      <td align="center" width="37%"><%= skill.level_type %></td>
+      <td align="center">
+       <%= link_to image_tag("canel.png"), delete_skill_user_path(skill), :class => "cancelButton"  %>
+      </td>
+    <% end %>
+
+  <% end %>
+</tr>

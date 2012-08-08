@@ -1,0 +1,25 @@
+<% content = @user.user_preference.contact_me ? "Block" : "Allow" %>
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+  <tr class="head">
+    <td align="left" width="39%">
+      <p class="wholebook-block-allow-user">
+        <%= content + " User" %>
+      </p>
+    </td>
+    <td align="center" width="37%"><p class="wholebook-block-allow-user">
+        Status
+      </p></td>
+    <td  align="center">
+      <div class="fr">
+        <div id="add_user_access_list">
+          <span class="addAttachIn">
+          <%= link_to "Add", add_user_access_list_users_path, { :id => "wholebooks-add-user-access-list" } %>
+            </span>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tbody id="user_access_lists">
+    <%= render :partial => 'user_access_list', :collection => @user.user_access_lists, :locals => { :status => content, :wholebooksclass => "wholebooks-usr-lst" } %>
+  </tbody>
+</table>

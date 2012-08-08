@@ -1,0 +1,48 @@
+.wholebook-block-allow-user {
+  font-weight: bold;
+  color:#5f5f5f;
+}
+
+.wholebook-hide {
+    display: none;
+}
+
+.pagedivider-timesheet {
+	float:left;
+	width:100%;
+        height: 240px;
+	border-bottom:1px solid #cccccc;
+}
+
+.prefix {
+   left: 20%;
+   position: fixed;
+}
+
+.auto-number-setting {
+    left: 35%;
+    position: absolute;
+}
+
+.number {
+    left: 50%;
+    position: absolute;
+}
+
+.num1 {
+    margin-top: 60px;
+    left: 35%;
+    position: absolute;
+}
+
+.concat {
+    margin-top: 70px;
+    left: 48%;
+    position: absolute;
+}
+
+.num2 {
+    margin-top: 60px;
+    left: 55%;
+    position: absolute;
+}

@@ -1,0 +1,105 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <a href="index.html">Home </a> / <a href="search_main.html">Search</a> / Contracts / Criteria</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <% form_for @search_contractor do |f| %>
+          <div class="pagedivider">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl  pt10">
+                <h2>Contracts Search Criteria</h2>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div class="w80"></div>
+            <div class="w100">
+              <div class="fl w50">
+                <div class="formItem w40 pt25 pl15 pb15"> <%= link_to current_user.name, account_url %> </div>
+                <div class="w40 fl mgr10 mgl10 pt15"><a class="link" href="search_usesavedsearchcriteria.html">Use Saved Search</a></div>
+                <div class="clear"></div>
+                <div class="formItem w40 pt15 pr15 pb15">
+                  <%= f.label :date_from, "Available Date From" %>
+                  <%= f.text_field :date_from, :class => "big w100" %>
+                </div>
+                <div class="formItem w40 pt15 pr15 pl15 pb15">
+                  <%= f.label :date_to, "Available Date To" %>
+                  <%= f.text_field :date_to, :class => "big w100" %>
+                </div>
+                <div class="formItem w40 pt15 pr15  pb15">
+                  <%= f.label :rate_from, "Preferred Rate From" %>
+                  <%= f.text_field :rate_from, :class => "big w100" %>
+                </div>
+                <div class="formItem w40 pt15 pr15 pl15 pb15">
+                  <%= f.label :rate_to, "Preferred Rate To" %>
+                  <%= f.text_field :rate_to, :class => "big w100" %>
+                </div>
+              </div>
+              <div class="fl w50">
+                <table width="100%" border="1" cellspacing="0" cellpadding="0">
+                  <tr class="head">
+                    <td width="42%" align="left"><strong>Skill List</strong></td>
+                    <td width="51%" align="center"><strong>Level</strong></td>
+                    <td width="7%"><div class="fr"><div id="add_search_skill"> <span class="addAttachIn"><a href="#">Add</a></span></div> </div></td>
+                  </tr>
+                  <tbody id="skills">
+                      <%= render :partial => 'skill', :collection => @search_contractor.skills %>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            </fieldset>
+          </div>
+          <div class="pagedivider">
+            <fieldset>
+            <div class="headingBg">
+              <div class="fl">
+                <h2>Position Desired</h2>
+              </div>
+              <div class="fr">
+                <div id="add_search_position"><div class="addAttachIn">Add</div></div>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="form w100">
+              <table width="100%" border="1" cellspacing="0" cellpadding="0">
+                <tbody id="positions">
+                  <%= render :partial => 'position', :collection => @search_contractor.positions %>
+                </tbody>
+              </table>
+            </div>
+            <div class="clear"></div>
+            </fieldset>
+          </div>
+          <div class="pagedivider pb15">
+            <fieldset>
+            <table width="100%" border="1" cellspacing="0" cellpadding="0">
+              <tr class="head">
+                <td width="42%" align="left"><strong>Country</strong></td>
+                <td width="51%" align="center"><strong>State</strong></td>
+                <td width="51%" align="center"><strong>City</strong></td>
+                <td width="7%"><div class="fr"><div id="add_search_place"> <span class="addAttachIn"><a href="#">Add</a></span></div> </div></td>
+              </tr>
+              <tbody id="places">
+                      <%= render :partial => 'place', :collection => @search_contractor.places %>
+                    </tbody>
+            </table>
+            </fieldset>
+          </div>
+        
+        <div class="buttonMainWrapper">
+          <div class="buttonWrapper">
+            <%= f.submit "Save Search Criteria", :class => "button" %>
+          </div>
+          <div class="buttonWrapper">
+            <form id="form1" name="form1" method="post" action="search_main.html">
+              <input type="submit" class="button" value="Search" tabindex="" />
+            </form>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>

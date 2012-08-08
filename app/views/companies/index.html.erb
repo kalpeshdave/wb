@@ -1,0 +1,60 @@
+<!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to "Home", root_url %> / <%= link_to "My Profile", account_url %> / Companies</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <div class="pagedivider pb25">
+          <div class="headingBg">
+            <div class="fr w30">
+              <% form_tag companies_path, :method => 'get' do %>
+                <fieldset class="search">
+                  <%= text_field_tag :search, params[:search], :class => "box" %>
+                  <%= submit_tag "Search", :class => "btn" %>
+                </fieldset>
+             <% end %>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table width="137%" border="1" cellpadding="0" cellspacing="0">
+            <tr class="head">
+              <td  align="left"><strong>Company Name</strong></td>
+              <td align="center"><strong>Website URL</strong></td>
+              <td align="center"><strong>Address Description</strong></td>
+              <td align="center"><strong>Country</strong></td>
+              <td width="11%" align="center"><%= link_to "Add", new_company_url, :class => "addAttachIn" %></td>
+            </tr>
+
+            <% unless @companies.blank? %>
+            <% @companies.each do |company| %>
+            <tr>
+              <td  align="left" width="25%">
+                <% if current_user.is_creator?(company) %>
+                <%= link_to company.name, edit_company_url(company) %>
+                <% else %>
+                <%= link_to company.name, company_url(company) %>
+                <% end %>
+              </td>
+              <td align="center" width="14%"><div align="left"><%=h company.url %></div></td>
+              <td align="center" width="34%"><div align="left"><%#=h company.address.try(:address_description) %></div></td>
+              <td align="center" width="13%"><div align="left"><%#=h company.address.try(:country) %></div></td>
+              <td align="center"></td>
+            </tr>
+            <%end%>
+            <% else %>
+            <tr>
+              <td>No Company Found.</td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+        <div class="buttonMainWrapper">
+          <div class="buttonCancel">
+            <form id="form1" name="form1" method="post" action="profile_profile.html">
+              <%= link_to "Cancel", account_url, :class => "buttonSubmit" %>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

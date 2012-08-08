@@ -1,0 +1,12 @@
+<div class="formItem w20 pr15">
+        <label for="country">Contract Description</label>
+        <input type="text" class="big w100" id="contract_description" value="<%= @contract.description %>" readonly=true />
+      </div>
+      <div class="formItem w20 pr15">
+        <%= label_tag "timesheet[time_base_id]", t("timesheets.time_base") %>
+        <% if time_base(@contract) %>
+        <%= select("timesheet", "time_base_id", TimeBase.all.map { |t| [t.name, t.id] }, {:prompt => "Please Select", :selected => time_base(@contract)[0][1]  }, { 'data-href' => get_time_units_timesheet_path(current_user), :class => "big w100" }) %>
+        <% else %>
+        <%= select("timesheet", "time_base_id", TimeBase.all.map { |t| [t.name, t.id] }, {:prompt => "Please Select"  }, { 'data-href' => get_time_units_timesheet_path(current_user), :class => "big w100" }) %>
+        <% end %>
+      </div>

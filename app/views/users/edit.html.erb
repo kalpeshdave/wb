@@ -1,0 +1,42 @@
+<!--CONTENT STARTS-->
+  <div class="content">
+    <!--BREADDRUMBS STARTS-->
+    <div id="breadcrumbs"> <%= link_to "Home", root_url %>  / <%= link_to "My Profile", account_url %> / Change Security Details</div>
+    <!--BREADDRUMBS ENDS-->
+    <!--FORM CONTAINER STARTS-->
+    <div class="formContainer">
+      <% form_for @user, :url => account_url(@user) do |f| %>
+      <% f.error_messages %>
+        <div class="pagedivider1 pb25">
+          <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Change Password</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          
+         <div class="formItem w25 pt15 pr15">
+            <label for="question">Secret Question</label>
+            <%= f.select :secret_question_id, SecretQuestion::NAMES, {:prompt => @user.secret_question.question}, {:class => "big w80"} %>
+          </div>
+          <div class="formItemNormal">
+            <label for="school">Answer</label>
+            <%= f.text_field :secret_answer, :class=> "big w100" %>
+          </div>
+          </fieldset>
+        </div>
+
+      <div class="clear"></div>
+      <div class="buttonMainWrapper">
+        <div class="buttonCancel">
+          <%= link_to "Cancel", account_url %>
+        </div>
+        <div class="buttonWrapper">
+          <%= f.submit "Update", :class => "button" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>

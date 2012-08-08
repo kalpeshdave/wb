@@ -1,0 +1,102 @@
+<div class="pagedivider">
+  <fieldset>
+    <div>
+    </div>
+    <div class="headingBg">
+      <div class="fl w30">
+        <h2><%= t('timesheets.create_timesheet') %></h2>
+      </div>
+      <div class="w20 fr">
+        <div class="w15 mgt5 mgr5 pt10 pl10 pb5 pr10 new fl"><%=h @timesheet.status.capitalize %></div>
+        <div class="form w60 fl">
+          <%= h @timesheet.timesheet_number %>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="w100 fl pt25 pb25 ">
+      <div class="formItem w15 pr15">
+        <%= label_tag t("timesheets.select_contract")+":"  %>
+
+        <%=h @timesheet.contract.contract_number %>
+      </div>
+      <div class="formItem w20 pr15">
+        <label for="country"><%= t("timesheets.contract_description") %>:</label>
+        <%=h @timesheet.contract.description %>
+      </div>
+      <div class="formItem w20 pr15">
+        <%= label_tag t("timesheets.time_base")+":" %>
+        <%=h @timesheet.time_base.name %>
+      </div>
+      <div class="formItem w20 pr15">
+        <%= label_tag t(:begin_date)+":" %>
+        <%=h @timesheet.start_date  %>
+      </div>
+      <div class="formItem w15 pr15">
+        <%= label_tag t(:end_date)+":" %>
+        <%=h @timesheet.end_date  %>
+      </div>
+    </div>
+    <div class="w100">
+      <div class="w65 fl">
+        <div class="w90">
+          <%= label_tag t(:description)+":" %>
+          <%=h @timesheet.description  %>
+        </div>
+      </div>
+    </div>
+    <div class="formItem w15 pr15">
+      <%#= check_box_tag :hide  %>
+      <%#= label_tag :hide, "Hide from Home Page" %>
+    </div>
+    <%- unless @timesheet.time_unit.blank? -%>
+    <div class="w15 fl">
+      <%= label_tag :time_unit_id, t("contracts.timesheet_default.time_unit")+":" %>
+      <%= h @timesheet.time_unit.name %>
+    </div>
+    <%- end -%>
+
+      <div class="clear"></div>
+  </fieldset>
+</div>
+<div class="pagedivider pb15">
+  <fieldset>
+    <div class="headingBg">
+      <div class="fl">
+        <h2>
+          <%= t(:calender) %>
+        </h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <table width="100%" border="1" cellspacing="0" cellpadding="0">
+      <tr class="head">
+        <td width="11%" align="left"><strong>Sunday</strong></td>
+        <td width="15%" align="center"><strong>Monday</strong></td>
+        <td width="16%" align="center"><strong>Tuesday</strong></td>
+        <td width="12%" align="center"><strong>Wednesday</strong></td>
+        <td width="15%"><strong>Thursday</strong></td>
+        <td width="15%"><strong>Friday</strong></td>
+        <td width="16%"><strong>Saturday</strong></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+      </tr>
+    </table>
+  </fieldset>
+</div>

@@ -1,0 +1,40 @@
+  <div class="w20 pl25 fl">
+    <div class="formItem w100 pt15">
+      <label for="checkbox1">
+        <%= address.address_type.humanize %></label>
+    </div>
+  </div>
+
+  <div class="w50 fl">
+    <div class="formItem w90 pt15">
+      <strong>Address Description:</strong>
+      <label><%= h address.address_description %></label>
+    </div>
+    <div class="formItem w90 pt15">
+      <strong>Address 1:</strong>
+      <label><%= h address.address_1 %></label>
+    </div>
+    <div class="formItem w90 pt15">
+      <strong>Address 2:</strong>
+      <label><%= h address.address_2 %></label>
+    </div>
+    <div class="formItem w90 pt15">
+      <strong>City:</strong>
+      <label><%= h address.city %></label>
+    </div>
+    <div class="formItem w40 pt15">
+      <strong>Postal Code:</strong>
+      <label><%= h address.zipcode %></label>
+    </div>
+    <div class="formItem w50 pt15">
+      <strong>State:</strong>
+      <label><%= h address.state %></label>
+    </div>
+    <div class="formItem w90 pt15">
+      <strong>Country:</strong>
+      <label><%= h address.country %></label>
+    </div>
+  </div>
+  <div class="fr pr25">
+        <%= link_to "Edit", edit_user_address_path(address), { :id => 'wholebooks-user-address-edit', 'data-address' => address.id, :class => "wholebook-show-address-#{address.id}" } %>
+      </div>

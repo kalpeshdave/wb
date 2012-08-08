@@ -1,0 +1,79 @@
+<!--CONTENT STARTS-->
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"> <a href="index.html">Home </a> / <a href="timesheet_timesheets.html">Timesheets</a> / Create</div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <%- form_for @timesheet, :url => timesheet_path(@timesheet), :html => {:multipart => true, :method => :put} do |f| -%>
+      <%= render "form", :f => f %>
+
+      <div class="pagedivider ">
+        <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Attachments</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table width="100%" border="1" cellspacing="0" cellpadding="0">
+            <tr class="head">
+              <td width="27%" align="left"><strong>File Name</strong></td>
+              <td width="15%" align="center"><strong>File Size</strong></td>
+              <td width="36%" align="center"><strong>Date</strong></td>
+              <td width="5%"><div class="fr"><div id="add_attachment"> <span class="addAttachIn">Add</span></div></div></td>
+            </tr>
+            <tbody id="attachments">
+              <%= render :partial => 'attachment', :collection => @timesheet.attachments %>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+      <div class="pagedivider pb15">
+        <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Contract History</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table width="100%" border="1" cellspacing="0" cellpadding="0">
+            <tr class="head">
+              <td width="27%" align="left"><strong>Date</strong></td>
+              <td width="15%" align="center"><strong>Action</strong></td>
+              <td width="17%" align="center"><strong>User</strong></td>
+            </tr>
+             <% @timesheet.versions.reverse.each do |history| %>
+            <tr>
+              <td width="27%" align="left"><%=h history.updated_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+              <td align="center"><%=h history.status  %></td>
+              <td width="17%" align="center">
+                <%=h history.timesheet.creator.name %>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        </fieldset>
+
+        <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+          <div class="buttonCancel">
+            <%= link_to "Cancel", timesheet_dashboard_url, :class => "buttonSubmit" %>
+          </div>
+          <div class="buttonWrapper">
+            <form id="form1" name="form1" method="post" action="timesheet_timesheets.html">
+              <input type="submit" class="button" value="Print" tabindex="" />
+            </form>
+          </div>
+        
+          <div class="buttonWrapper">
+            <%= f.submit "Save & Submit", :class => "button" %>
+          </div>
+        
+          <div class="buttonWrapper">
+            <%= f.submit "Save", :class => "button" %>
+          </div>
+        </div>
+      <%- end -%>
+    </div>
+  </div>
+  </div>

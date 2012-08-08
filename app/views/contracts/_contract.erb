@@ -1,0 +1,41 @@
+
+<% if params[:controller] == "search_contracts" %>              
+  <tr>
+    <td><%= check_box_tag "people[]",  contract.creator.email %></td>
+    <td width="36%" align="left">Agent</td>
+    <td width="23%" align="left">Client</td>
+    <td width="35%" align="left"><%=h contract.created_at %></td>
+    <td width="35%" align="left">Date Needed</td>
+    <td width="35%" align="left"><%=h contract.city %></td>
+    <td width="35%" align="left"><%=h contract.state %></td>
+    <td width="35%" align="left"><%=h contract.country %></td>
+    <td width="35%" align="left"><%=h contract.rate %></td>
+  </tr>
+<% else %>
+  <% user = User.find(contract.created_by) %>
+  <tr>
+    <td><%= check_box_tag "people[]",  user.email %></td>
+    <td width="36%" align="left"><%=h user.name %></td>
+    <td width="23%" align="left">Available</td>
+    <td width="35%" align="left">
+        <% if user.skills %>
+          <% user.skills.each do |s| %><%=h s.name %>,<% end %>
+        <% else %>
+          No Skills
+        <% end %>
+     </td>
+    <td width="35%" align="left">
+      <% if user.skills %>
+          <% user.skills.each do |s| %><%=h s.level_type %>,<% end %>
+        <% else %>
+          No Level
+        <% end %>
+    </td>
+    <td width="35%" align="left"><%=h contract.city %></td>
+    <td width="35%" align="left"><%=h contract.state %></td>
+    <td width="35%" align="left"><%=h contract.country %></td>
+    <td width="35%" align="left">Position</td>
+    <td width="35%" align="left">Pref.Rate</td>
+  </tr>
+<% end %>
+ 

@@ -1,0 +1,46 @@
+<!--CONTENT STARTS-->
+  <div class="content">
+    <!--BREADDRUMBS STARTS-->
+    <div id="breadcrumbs"> <a href="index.html">Home </a> / <a href="contract_contracts.html">Contracts </a>/ <a href="contract_contract_create.html">Create </a>/ Create from Template</div>
+    <!--BREADDRUMBS ENDS-->
+    <!--FORM CONTAINER STARTS-->
+    <div class="formContainer">
+      <div class="pagedividerpb25 pt25">
+        <div class="headingBg">
+          <div class="fl">
+            <h2>Select a Contract Template</h2>
+            </div>
+          <div class="clear"></div></div>
+            <div class="w100 fl">
+            <div class="w100 pl25 fl"></div>
+              <table width="137%" border="1" cellpadding="0" cellspacing="0">
+                <tr class="head">
+               <td  align="left" width="20%"><strong>Contract Number</strong></td>
+              <td align="center" width="30%"><strong>Description</strong></td>
+              <td align="center" width="26%"><strong>Recipient Contact</strong></td>
+              <td align="center" width="26%"><strong>Recipient Company</strong></td>
+              </tr>
+            <% unless @contracts.blank? %>
+              <% @contracts.each do |template| %>
+            <tr>
+              <td  align="left" width="26%"><%= link_to template.contract_number, edit_contract_url(template) %></td>
+              <td align="center" width="26%"><%= link_to template.description, new_contract_url(:template_id => template.id) %></td>
+              <td align="center" width="26%"><%=h template.recepient ? template.recepient.name.capitalize : "" %></tdf>
+              <td align="center" width="26%"><%=h template.recepient_company ? template.recepient_company.name.capitalize : "" %></td>
+              </tr>
+              <% end %>
+              <% else %>
+              <tr><strong>No Template Found!</strong></tr>
+              <% end %>
+          </table>
+          </div>
+            <div class="buttonMainWrapper pt25 pr25">
+            <div class="buttonCancel">
+              <%= link_to "Cancel", contract_dashboard_url, :class => "buttonSubmit"  %>
+          </div>
+
+
+    </div>
+      </div>
+    </div>
+    </div>

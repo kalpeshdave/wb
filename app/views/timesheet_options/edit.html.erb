@@ -1,0 +1,75 @@
+<!--CONTENT STARTS-->
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"> <a href="index.html">Home </a> / <a href="contract_contracts.html">Contracts </a>/ <a href="contract_contract_create.html">Create </a>/ Timesheets Options</div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <div class="pagedividerpb25 pt25">
+      <div class="headingBg">
+        <div class="fl">
+          <h2>Timesheets Options</h2>
+        </div>
+        <div class="clear"></div></div>
+      <div class="w100 fl">
+        <div class="w100 pl25 fl">
+          <div class="formItem w40 pt15">
+            <label for="checkbox">
+              <%= check_box_tag "allow_timesheet", current_user.contract_default.allow_timesheet? ? 1 : 0, current_user.contract_default.allow_timesheet? ? true : false, :class => "small"  %>
+              Allow Timesheets</label>
+          </div>
+          <div class="formItem w50 pt15">
+            <label for="checkbox">
+              <%= check_box_tag "require_timesheet_signature", current_user.contract_default.require_timesheet_signature? ? 1 : 0, current_user.contract_default.require_timesheet_signature? ? true : false, :class => "small"   %>
+              Require Timesheet Signature</label>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <% if current_user.contract_default.require_timesheet_signature? %>
+          <% form_for @contract.timesheet_options, :url => contract_timesheet_option_path(@contract), :html => { :method => :put } do |f| %>
+            <%= hidden_field_tag "contract_type", params[:contract_type] %>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+              <tr class="head">
+                <td  align="left" width="26%"><strong>First Name</strong></td>
+                <td align="center" width="32%"><strong>Last Name</strong></td>
+                <td align="center" width="29%"><strong>Visibilty</strong></td>
+                <td align="center" width="8%">
+                  <div class="fr">
+                    <div id="add_timesheet_option">
+                      <span class="addAttachIn">
+                        <%= link_to "Add", "javascript:void(0);", { :class => "wholebooks-add-time-sheet-option"} %>
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tbody id="timesheet_options">
+                <%= render :partial => "contracts/timesheet_option",  :collection => @contract.timesheet_options %>
+              </tbody>
+
+
+            </table>
+      </div>
+      <div class="buttonMainWrapper pt25 pr25">
+        <div class="buttonCancel">
+          <%= link_to "Cancel", new_contract_url, :class => "buttonSubmit"  %>
+        </div>
+
+        <div class="buttonWrapper">
+            <input type="submit" class="button" value="Update" tabindex="" />
+        </div>
+      </div>
+       <%- end -%>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(".wholebooks-add-time-sheet-option").live('click', function() {
+    $("#timesheet_options").append('<%= escape_javascript(render(:partial => "contracts/timesheet_option",  :object => TimesheetOption.new)) %>');
+    return false;
+  });
+</script>

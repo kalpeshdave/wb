@@ -1,0 +1,64 @@
+<!--CONTENT STARTS-->
+<div class="content">
+  <!--BREADDRUMBS STARTS-->
+  <div id="breadcrumbs"> <a href="index.html">Home </a> / <a href="timesheet_timesheets.html">Timesheets</a> / Create</div>
+  <!--BREADDRUMBS ENDS-->
+  <!--FORM CONTAINER STARTS-->
+  <div class="formContainer">
+    <%- form_for @timesheet, :html => {:multipart => true} do |f| -%>
+      <%= render "form", :f => f %>
+
+      <div class="pagedivider ">
+        <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2><%= t(:attachments) %></h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table width="100%" border="1" cellspacing="0" cellpadding="0">
+            <tr class="head">
+              <td width="27%" align="left"><strong>File Name</strong></td>
+              <td width="15%" align="center"><strong>File Size</strong></td>
+              <td width="36%" align="center"><strong>Date</strong></td>
+              <td width="5%"><div class="fr"><div id="add_attachment"> <span class="addAttachIn">Add</span></div></div></td>
+            </tr>
+            <tbody id="attachments">
+              <%= render :partial => 'attachment', :collection => @timesheet.attachments %>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+      <div class="pagedivider pb15">
+        <fieldset>
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Timesheet History</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <table width="100%" border="1" cellspacing="0" cellpadding="0">
+            <tr class="head">
+              <td width="27%" align="left"><strong>Date</strong></td>
+              <td width="15%" align="center"><strong>Action</strong></td>
+              <td width="17%" align="center"><strong>User</strong></td>
+            </tr>
+          </table>
+        </fieldset>
+
+        <div class="buttonMainWrapper pt25 pr25 pl25 pb25">
+          <div class="buttonCancel">
+            <%= link_to "Cancel", timesheet_dashboard_url, :class => "buttonSubmit" %>
+          </div>
+          
+          <div class="buttonWrapper">
+            <%= f.submit "Create & Submit", :class => "button" %>
+          </div>
+          <div class="buttonWrapper">
+            <%= f.submit "Create", :class => "button" %>
+          </div>
+        </div>
+      <%- end -%>
+    </div>
+  </div>
+</div>

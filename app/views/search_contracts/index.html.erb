@@ -1,0 +1,43 @@
+ <!--CONTENT STARTS-->
+    <div class="content">
+      <!--BREADDRUMBS STARTS-->
+      <div id="breadcrumbs"> <%= link_to "Home", root_url %>  / Search</div>
+      <!--BREADDRUMBS ENDS-->
+      <!--FORM CONTAINER STARTS-->
+      <div class="formContainer">
+        <div class="pagedivider">
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Posting</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="w20 fl mgr10 pt15"><%= link_to "Post Contract", "", :class => "link" %></div>
+          <div class="w20 fl mgr10 pt15"><%= link_to "Post Availability", "", :class => "link" %></div>
+          <div class="w20 fl mgr10 pt15"><%= link_to "Agent Posting", "", :class => "link" %></div>
+        </div>
+        <div class="pagedivider">
+          <div class="headingBg">
+            <div class="fl">
+              <h2>Search</h2>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="w20 fl mgr10 pt15">
+              <% unless current_user.search_contract.blank? %>
+                <%= link_to "Search Contract", search_contract_url(current_user.search_contract), :class => "link" %>
+              <% else %>
+              <%= link_to "Search Contract", new_search_contract_url, :class => "link"  %>
+              <% end %>
+          </div>
+          <div class="w20 fl mgr10 pt15">
+            <% unless current_user.search_contractor.blank? %>
+              <%= link_to "Search Contractor", search_contractor_url(current_user.search_contractor), :class => "link" %>
+            <% else %>
+              <%= link_to "Search Contractor", new_search_contractor_url, :class => "link" %>
+            <% end %>
+          </div>
+          <div class="w20 fl mgr10 pt15"><%= link_to "Search Agent", "", :class => "link" %></div>
+        </div>
+      </div>
+    </div>

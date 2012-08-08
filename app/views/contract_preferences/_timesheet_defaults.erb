@@ -1,0 +1,28 @@
+<%- u.fields_for :timesheet_default_attributes, current_user.timesheet_default do |f| -%>
+  <%= f.hidden_field :id  %>
+<fieldset>
+  
+  <div class="headingBg">
+    <div class="fl">
+      <h2><%= t("contracts.timesheet_default.timesheet_defaults") %></h2>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="form w20 pr15 pt15 fl">
+    <%= f.label :time_base_id, t("contracts.timesheet_default.timesheets_entered_each") %>
+    <%= f.select(:time_base_id, TimeBase.all.map { |t| [t.name, t.id] }, { :include_blank => "Select"  }, { 'data-href' => get_time_units_user_contract_preference_url(current_user), :class => "big w100" }) %>
+  </div>
+  <div class="form w20 pr15 pt15 fl">
+    <%= f.label :time_unit_id, t("contracts.timesheet_default.time_unit") %>
+    <% value = current_user.timesheet_default.time_base.nil? ? (current_user.timesheet_default.time_unit.nil? ? [["Please Select", ""]] : [[current_user.timesheet_default.time_unit.name, current_user.timesheet_default.time_unit.id]]) : time_units(current_user.timesheet_default.time_base.id) %>
+    <div id="time_units">
+        <%= f.select(:time_unit_id, value, { :prompt => "Please Select" }, { :class => "big w100" }) %>
+      </div>
+  </div>
+  <div class="form w20 pr15 pt15 fl">
+    <%= f.label :default_value, t("contracts.timesheet_default.default_value") %>
+    <%= f.text_field :default_value, { :class => "big w100" } %>
+  </div>
+  <div class="clear"></div>
+</fieldset>
+<%- end -%>

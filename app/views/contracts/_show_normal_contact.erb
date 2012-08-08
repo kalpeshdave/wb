@@ -1,0 +1,37 @@
+
+<div class="formItem w20">
+  Client Company
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <div id="client_company">
+      <label><%= h  @contract.creator.company_users.first.company.name %></label>
+    </div>
+  </div>
+</div>
+
+<div class="formItem w20 pr25">
+  Client Contact
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <div id="client_contact">
+      <label><%= h "#{@contract.creator.name.capitalize}" %></label>
+    </div>
+  </div>
+</div>
+<div class="formItem w20">
+  Recipient Company
+  <div class="clear"></div>
+  <div class="pt10 pl5">
+    <label><%= h @contract.recepient_company.name %></label>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="formItem w20">
+  Recipient Contact
+  <div class="clear"></div>
+  <div class="recipients pt10 pl5">
+    <label><%= h "#{@contract.recepient.first_name.capitalize} #{@contract.recepient.last_name.capitalize}" %></label>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,18 @@
+<tr class="place">
+  <% fields_for_task(place, "place") do |a| %>
+    <% if place.new_record? %>
+      <td><%= a.localized_country_select(:country, [], { :include_blank => 'Please choose...' },  { :class => "big w100"}) %></td>
+      <td><%= a.text_field :state, :class => "big w100" %></td>
+      <td><%= a.text_field :city, :class => "big w100" %></td>
+
+      <td align="center"><%= link_to_function image_tag("canel.png"), "$('.cancelButton').live('click',function() {$(this).parents('tr:first').remove();});", :class => "cancelButton" %></td>
+    <% else %>
+      <td align="center"><%=h place.country  %></td>
+      <td><%=h place.state %></td>
+      <td><%=h place.city %></td>
+
+      <td align="center"><%#= link_to image_tag("canel.png"), delete_attachment_user_path(attachment), :class => "cancelButton"  %></td>
+    <% end %>
+  <% end %>
+
+</tr>    

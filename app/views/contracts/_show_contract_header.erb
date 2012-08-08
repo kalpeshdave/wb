@@ -1,0 +1,154 @@
+<%# address = current_user.addresses.first %>
+<div class="pagedivider">
+  <fieldset>
+    <div class="headingBg">
+      <div class="fl w30 pt5">
+        <h2>
+          Contract Details
+        </h2>
+      </div>
+      <div class="w45 fr">
+        <div class="w30 fl mgt10"><%= label_tag :contract_number, t("contracts.contract_number") %>:&nbsp;</div>
+        <div class="form w30 pt10 fl">
+          <%= @contract.contract_number %>
+        </div>
+        <div class="w10 fl mgt10 pl10"><label for="status">Status&nbsp;:&nbsp;</label></div>
+        <div class="w10 mgt5 pt5 pl10 pb5 new fl">
+          <%= @contract.new_record? ? t("new") : @contract.status.capitalize%>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="w100 fl pt25 pb25">
+      <div class="formItem w20 ">
+        <%= label_tag :contract_type_id, t("contracts.contract_type") %>
+        <div class="w70 mgt5 mgr5 pt5 pl10 pb5 pr10 new ">
+          <%- if @contract.parent_id.blank? -%>
+            Standard
+          <%- else -%>
+            Sub-Contract
+          <%- end -%>
+        </div>
+      </div>
+        <div class="formItem w15 pr25">
+          Country:
+          <label><%= @contract.country %></label>
+        </div>
+        <div class="formItem w15 pr25">
+          State:
+          <label><%= @contract.state %></label>
+        </div>
+        <div class="formItem w10 pr25">
+          City:
+          <label><%= @contract.city %></label>
+        </div>
+      
+      <div class="form fl w15">
+        State Date:
+        <label><%= @contract.try(:start_date) %></label>
+      </div>
+      <div class="form fl w10">
+        End Date
+        <label><%= @contract.try(:end_date) %></label>
+      </div>
+    </div>
+    <div class="w100">
+      <div class="w75 fl">
+        <div class="w90">
+          Title:<br />
+          <label><%= @contract.description %></label>
+        </div>
+        <br /><br />
+        <div class="w90">
+          Description: <br />
+          <label><%= @contract.long_description %></label>
+        </div>
+      </div>
+    </div>
+    <%- if @contract.creator.eql?(current_user) -%>
+    <div class="formItemMedium">
+      <%= check_box_tag("contract[][is_template]",  @contract.is_template, checked = @contract.is_template , {'data-href' => update_is_template_contract_url(@contract)})  %>
+      <%= label_tag :is_template, "Use as a Template" %>
+    </div>
+    <%- end -%>
+
+    
+    <div class="formItemMedium">
+      <%#= f.check_box :is_template %>
+      <%#= f.label :is_template, "Use as a Template" %>
+    </div>
+    <div class="formItemMedium">
+      <%#= f.check_box :hide  %>
+      <%#= f.label :hide, "Hide from Home Page" %>
+    </div>
+
+    <div class="formItemMedium">
+      <%#= f.check_box :is_recipient, :readonly => @contract.new_record? ? false : true %>
+      <%#= f.label :is_recipient, "Recipient Created" %>
+    </div>
+    
+    <div class="w100 fl pt10 pb10" style="padding-top: 30px;">
+        <% if @contract.is_recipient? %>
+          <%= render "show_recepient_contact" %>
+        <% else %>
+          <%= render "show_normal_contact"  unless @contract.recepient_company.blank? %>
+        <% end %>
+    </div>
+  </fieldset>
+</div>
+ <div class="clear"></div>
+ <fieldset>
+    <div class="headingBg">
+      <div class="fl">
+        <h2>Timesheet Defaults</h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+   <div class="form w20 fl pr25 pt15">
+        <%= label_tag :time_base_id, t("contracts.timesheet_default.timesheets_entered_each") %>
+        <%= @contract.timesheet_default.time_base.nil? ? "Not Selected" : @contract.timesheet_default.time_base.name %>
+      </div>
+      <div class="form w20 fl pr25 pt15">
+        <%= label_tag :time_unit_id, t("contracts.timesheet_default.time_unit") %>
+        <%= @contract.timesheet_default.time_unit.nil? ? "Not Selected" : @contract.timesheet_default.time_unit.name %>
+      </div>
+      <div class="form w20 fl pr25 pt15">
+        <%= label_tag :default_value, t("contracts.timesheet_default.default_value") %>
+        <%= @contract.timesheet_default.default_value %>
+      </div>
+ </fieldset>
+
+ <fieldset>
+    <div class="headingBg">
+      <div class="fl">
+        <h2><%= t("contracts.invoice_default.invoice_defaults") %></h2>
+      </div>
+      <div class="clear"></div>
+    </div>
+   <div class="formItem w20 pt25 pr25">
+        <%= label_tag :payment_term_id, t("payments.payment_terms") %>
+        <%=h @contract.payment_term_id %>
+      </div>
+   <div class="formItem w20 pt25 pr25">
+        <%= label_tag :rate %>
+        <%=h @contract.rate %>
+      </div>
+      <div class="formItem w20 pt25 pr25">
+        <%= label_tag :unit_quantity %>
+        <%#=h @contract.unit_quantity %>
+      </div>
+      <div class="formItem w20 pt25">
+        <%= label_tag :currency_id, t("currency") %>
+        <%=h @contract.currency_id %>
+      </div>
+ </fieldset>
+ 
+<div class="pagedivider pb15">
+  <%#= render "new_timesheet_defaults", :c => f %>
+</div>
+
+<div class="pagedivider pb15">
+  <%#= render "invoice_defaults", :c => f %>
+</div>
+
